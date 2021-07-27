@@ -27,7 +27,7 @@ collections:
     view_groups:
       - label: "Time"
         field: "publishedDate"
-        pattern: [a-zA-Z ]{4}\d{4}$
+        pattern: /[a-zA-Z ]{4}\d{4}$/g
     slug: "{{fields.slug}}"
     fields:
       - {label: "Draft", name: "draft", widget: "boolean", default: false, required: false}
