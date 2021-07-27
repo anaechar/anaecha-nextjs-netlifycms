@@ -1,19 +1,9 @@
-import { IncomingMessage, ServerResponse } from "http";
+import { IncomingMessage, ServerResponse } from 'http';
 import { AuthorizationCode } from 'simple-oauth2';
+import { config } from './lib/config';
 
 export default async (req: IncomingMessage, res: ServerResponse) => {
   const { host } = req.headers;
-  const config = {
-    client: {
-      id: process.env.OAUTH_GITHUB_CLIENT_ID,
-      secret: process.env.OAUTH_GITHUB_CLIENT_SECRET
-    },
-    auth: {
-      tokenHost: 'https://github.com',
-      tokenPath: '/login/oauth/access_token',
-      authorizePath: '/login/oauth/authorize'
-    }
-  };
   const url = new URL(`https://${host}/${req.url}`);
   const urlParams = url.searchParams;
   const code = urlParams.get('code');
@@ -34,7 +24,7 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
     res.end(responseBody);
   } catch (e) {
     res.statusCode = 200;
-    res.end(renderBody("error", e));
+    res.end(renderBody('error', e));
   }
 };
 

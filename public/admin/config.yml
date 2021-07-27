@@ -10,8 +10,8 @@ media_library:
     cloud_name: "beforeifly"
     api_key: "822585855683452"
 collections:
-  - name: "posts"
-    label: "Posts"
+  - label: "Posts"
+    name: "posts"
     folder: "contents/posts"
     extension: mdx
     format: frontmatter
@@ -38,3 +38,15 @@ collections:
         multiple: true
         required: true
       - {label: "Body", name: "body", widget: "markdown", required: true}
+  - label: "Settings"
+    name: "settings"
+    files: 
+      - label: "Categories"
+        name: "categories"
+        file: "contents/posts-settings/categories.yml"
+        fields:
+          - label: "Categories"
+            name: "categories"
+            widget: "list"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
