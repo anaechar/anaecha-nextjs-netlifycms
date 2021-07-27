@@ -44,7 +44,7 @@ Normally, Netlify CMS works perfectly while hosting on Netlify. However, it does
 +     - config.yml
 ```
 
-2. Paste the code below inside the **index.html** file 
+2. Paste the code below inside the **index.html** file, this will create admin page for Netlify CMS.
 
 ```html
 <!doctype html>
@@ -62,7 +62,8 @@ Normally, Netlify CMS works perfectly while hosting on Netlify. However, it does
 </html>
 ```
 
-3. Paste code below inside the **config.yml** file
+3. Paste code below inside the **config.yml** file, this will configure Netlify CMS settings.\
+   To learn more about this file, visit this [documentation](https://www.netlifycms.org/docs/configuration-options/).
 
 ```
 backend:
@@ -147,7 +148,7 @@ collections:
 npm install @types/react @types/simple-oauth2 simple-oauth2 --save-dev
 ```
 
-5. Paste code below inside config.ts file
+5. Paste code below inside **config.ts** file
 
 ```
 export const config = {
@@ -163,7 +164,7 @@ export const config = {
 };
 ```
 
-6. Paste code below inside auth.ts file
+6. Paste code below inside **auth.ts** file
 
 ```
 import { IncomingMessage, ServerResponse } from 'http';
@@ -187,7 +188,7 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
 };
 ```
 
-7. Paste code below inside callback.ts file
+7. Paste code below inside **callback.ts** file
 
 ```
 import { IncomingMessage, ServerResponse } from 'http';
@@ -244,7 +245,11 @@ function renderBody(
 }
 ```
 
-8. Push your codes to the repository
+8. Push your codes to the repository by running this code
+
+```
+git push origin main
+```
 
 ## Create Github App
 
@@ -272,3 +277,19 @@ function renderBody(
 4. Enter names and values as followed:\
    **OAUTH_GITHUB_CLIENT_ID** as NAME and your **Client ID** as VALUE\
    **OAUTH_GITHUB_CLIENT_SECRET** as NAME and your **Client Secret** as VALUE
+
+## Test Netlify CMS
+
+1. Go to your-domain/admin/index.html
+2. Click on "Sign in with Github"
+3. If authorization is success, you will see Netlify CMS dashboard. Test creating posts and pages. \
+   \
+   The related MDX files will be stored inside /contents/posts and /content/pages. It will not reflect in your code editor. To update codes inside your code editor, run this command.
+
+```
+git pull origin main
+```
+
+That is all. Congratulation!!\
+\
+In the next part, I will code to display content created by Netlify CMS.
