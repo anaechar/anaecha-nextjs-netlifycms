@@ -25,16 +25,16 @@ collections:
         field: "category"
         pattern: "Coding"
     view_groups:
-      - label: "Year"
-        field: "publishedAt"
-        pattern: \d{4}
+      - label: "Time"
+        field: "publishedDate"
+        pattern: "[a-zA-Z ]{4}\d{4}$"
     slug: "{{fields.slug}}"
     fields:
       - {label: "Draft", name: "draft", widget: "boolean", default: false, required: false}
       - {label: "Title", name: "title", widget: "string", required: true}
       - {label: "Slug", name: "slug", widget: "string", required: true}
       - {label: "Description", name: "description", widget: "string", default: "", required: false}
-      - {label: "Published At", name: "publishedAt", widget: "date", format: "D MMM YYYY", required: true}
+      - {label: "Published Date", name: "publishedDate", widget: "date", format: "D MMM YYYY", required: true}
       - label: "Category"
         name: "category"
         widget: "relation"
