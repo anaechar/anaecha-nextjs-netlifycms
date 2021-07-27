@@ -14,6 +14,8 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
     redirect_uri: `https://${host}/callback?provider=${provider}`,
   };
 
+  alert(tokenParams);
+
   try {
     const accessToken = await client.getToken(tokenParams);
     const token = accessToken.token["access_token"];
