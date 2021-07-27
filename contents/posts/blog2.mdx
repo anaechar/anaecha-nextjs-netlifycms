@@ -32,6 +32,12 @@ Normally, Netlify CMS works perfectly while hosting on Netlify. However, it does
 +   - posts-settings
 +     - categories.yml
 +   - pages
+  - pages
+    - api
++     - lib
++       - config.ts
++     - auth.ts
++     - callback.ts
   - public
 +   - admin
 +     - index.html
@@ -135,41 +141,8 @@ collections:
               - {label: "Name", name: "name", widget: "string"}
 ```
 
-## Set up API
-
-install @vercel/node simple-oauth2
-create auth.ts, callback.ts and /lib/oauth2.ts
-
-Install 
+4. Install **@types/react**, **@types/simple-oauth2** and **[simple-oauth2](https://www.npmjs.com/package/simple-oauth2)**
 
 ```
-npm install @vercel/node --save-dev
+npm install @types/react @types/simple-oauth2 simple-oauth2 --save-dev
 ```
-
-https://vercel.com/docs/runtimes
-
-2. We will start with fresh and clean project. So, we will delete some files.
-
-Delete "Home.module.css"
-
-```
-- styles
-    - Home.module.css
-```
-
-Delete "vercel.svg"
-
-```
-- public
-    - vercel.svg
-```
-
-Delete "Hello.js"
-
-```
-- pages
-  - api
-    - hello.js
-```
-
-Open "/pages/index.js" and ...
