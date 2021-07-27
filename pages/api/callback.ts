@@ -1,8 +1,8 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
+import { IncomingMessage, ServerResponse } from "http";
 import { AuthorizationCode } from 'simple-oauth2';
 import { config } from './lib/config';
 
-export default async (req: VercelRequest, res: VercelResponse) => {
+export default async (req: IncomingMessage, res: ServerResponse) => {
   const { host } = req.headers;
   const url = new URL(`https://${host}/${req.url}`);
   const urlParams = url.searchParams;
