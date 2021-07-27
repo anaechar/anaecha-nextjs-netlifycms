@@ -22,11 +22,11 @@ collections:
         pattern: true
     slug: "{{fields.slug}}"
     fields:
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
+      - {label: "Draft", name: "draft", widget: "boolean", default: false, required: false}
       - {label: "Title", name: "title", widget: "string", required: true}
       - {label: "Slug", name: "slug", widget: "string", required: true}
-      - {label: "Description", name: "description", widget: "string", required: true}
-      - {label: "DateTime", name: "datetime", widget: "datetime", format: "x",required: true}
+      - {label: "Description", name: "description", widget: "string", default: "", required: false}
+      - {label: "DateTime", name: "datetime", widget: "datetime", format: "x", required: true}
       - label: "Category"
         name: "category"
         widget: "relation"
@@ -37,9 +37,9 @@ collections:
         value_field: "categories.*.name"
         multiple: true
         required: true
-      - {label: "Tags", name: "tags", widget: "string", required: false}
-      - {label: "Body", name: "body", widget: "markdown", required: true}
-      - {label: "Robots", name: "robots", widget: "boolean", default: true}
+      - {label: "Tags", name: "tags", widget: "string", default: "", required: false}
+      - {label: "Body", name: "body", widget: "markdown", default: "", required: true}
+      - {label: "Robots", name: "robots", widget: "boolean", default: true, required: false}
   - label: "Pages"
     name: "pages"
     folder: "contents/pages"
@@ -52,14 +52,14 @@ collections:
         pattern: true
     slug: "{{fields.slug}}"
     fields:
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
+      - {label: "Draft", name: "draft", widget: "boolean", default: false, required: false}
       - {label: "Title", name: "title", widget: "string", required: true}
       - {label: "Slug", name: "slug", widget: "string", required: true}
-      - {label: "Description", name: "description", widget: "string", required: true}
+      - {label: "Description", name: "description", widget: "string", default: "", required: false}
       - {label: "Date", name: "date", widget: "date", format: "D MMM YYYY",required: true}
-      - {label: "Body", name: "body", widget: "markdown", required: true}
-      - {label: "Nav", name: "nav", widget: "boolean", default: false}
-      - {label: "Robots", name: "robots", widget: "boolean", default: true}
+      - {label: "Body", name: "body", widget: "markdown", default: "", required: false}
+      - {label: "Nav", name: "nav", widget: "boolean", default: false, required: false}
+      - {label: "Robots", name: "robots", widget: "boolean", default: true, required: false}
   - label: "Settings"
     name: "settings"
     files: 
