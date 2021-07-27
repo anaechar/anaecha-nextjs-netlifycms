@@ -14,13 +14,15 @@ In this part, I will introduce "[Netlify CMS](http://netlifycms.org)" for our Ne
 
 To be clear, Netlify CMS is different from Netlify itself. Netlify provides services like Hosting and so on but Netlify CMS is a script to manage content.
 
+Normally, Netlify CMS works perfectly while hosting on Netlify. However, it does not support some NextJs functionalities. This is why there are some workarounds involved to make it work on [Vercel](https://vercel.com).
+
 ## Why Netlify CMS?
 
 Firstly, it is free. To build a personal blog, I want to minimize cost as much as possible because I want to experiment many things with this blog. It will keep changing and I do not want to pay for those changes.
 
 I have tried many CMS solutions; for example, [Contentful](https://www.contentful.com), [Strapi](https://strapi.io), [MongoDB](https://www.mongodb.com) and pure [MDX](https://mdxjs.com) editing. Actually, working with MDX alone is great experience but with more and more contents, it makes me frustrated. The good news is that Netlify CMS supports MDX format.
 
-Normally, Netlify CMS works perfectly while hosting on Netlify. However, it does not support some NextJs functionalities. This is why there are some workarounds involved to make it work on [Vercel](https://vercel.com).
+Netlify CMS works with Github repository for creating, editing and deleting. Once there are changes in the repository, Vercel will know and then re-build the site.
 
 ## Introduce Netlify CMS
 
