@@ -13,7 +13,8 @@ collections:
   - name: "posts"
     label: "Posts"
     folder: "contents/posts"
-    extension: "mdx"
+    extension: mdx
+    format: frontmatter
     create: true
     view_filters:
       - label: "Drafts"
