@@ -25,7 +25,7 @@ collections:
         field: "category"
         pattern: "Coding"
     view_groups:
-      - label: "Month Year"
+      - label: "MonthYear"
         field: "publishedAt"
         pattern: [a-zA-z ]{4}\d{4}
     slug: "{{fields.slug}}"
