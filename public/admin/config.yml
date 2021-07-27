@@ -58,6 +58,7 @@ collections:
     extension: mdx
     format: frontmatter
     create: true
+    sortable_fields: ["timestamp"]
     view_filters:
       - label: "Drafts"
         field: "draft"
@@ -65,16 +66,24 @@ collections:
       - label: "Nav"
         field: "nav"
         pattern: true
+      - label: "Robots"
+        field: "robots"
+        pattern: false
+    view_groups:
+      - label: "Month-Year:"
+        field: "publishedDate"
+        pattern: \w{3}.\d{4}
     slug: "{{fields.slug}}"
     fields:
       - {label: "Draft", name: "draft", widget: "boolean", default: false, required: false}
       - {label: "Title", name: "title", widget: "string", required: true}
       - {label: "Slug", name: "slug", widget: "string", required: true}
       - {label: "Description", name: "description", widget: "string", default: "", required: false}
-      - {label: "Published At", name: "publishedAt", widget: "date", format: "D MMM YYYY",required: true}
+      - {label: "Published Date", name: "publishedDate", widget: "date", format: "D MMM YYYY",required: true}
       - {label: "Body", name: "body", widget: "markdown", default: "", required: false}
       - {label: "Nav", name: "nav", widget: "boolean", default: false, required: false}
       - {label: "Robots", name: "robots", widget: "boolean", default: true, required: false}
+      - {label: "Timestamp", name: "timestamp", widget: "datetime", format: "x", required: true}
   - label: "Settings"
     name: "settings"
     files: 
