@@ -16,25 +16,32 @@ collections:
     extension: mdx
     format: frontmatter
     create: true
-    sortable_fields: ["publishedat"]
+    sortable_fields: ["publishedAt"]
     view_filters:
       - label: "Drafts"
         field: "draft"
         pattern: true
+      - label: "category"
+        field: "category"
+        pattern: "*"
+    view_groups:
+      - label: "Year"
+        field: "publishedAt"
+        pattern: \d{4}
     slug: "{{fields.slug}}"
     fields:
       - {label: "Draft", name: "draft", widget: "boolean", default: false, required: false}
       - {label: "Title", name: "title", widget: "string", required: true}
       - {label: "Slug", name: "slug", widget: "string", required: true}
       - {label: "Description", name: "description", widget: "string", default: "", required: false}
-      - {label: "PublishedAt", name: "publishedat", widget: "datetime", format: "x", required: true}
+      - {label: "Published At", name: "publishedAt", widget: "datetime", format: "x", required: true}
       - label: "Category"
         name: "category"
         widget: "relation"
         collection: "settings"
         file: "categories"
         search_fields: ["categories.*.name"]
-        display_fields: ['categories.*.name']
+        display_fields: ["categories.*.name"]
         value_field: "categories.*.name"
         multiple: true
         required: true
