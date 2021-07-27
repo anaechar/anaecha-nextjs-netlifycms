@@ -146,3 +146,120 @@ collections:
 ```
 npm install @types/react @types/simple-oauth2 simple-oauth2 --save-dev
 ```
+
+5. Paste code below inside config.ts
+
+```
+export const config = {
+  client: {
+    id: process.env.OAUTH_GITHUB_CLIENT_ID,
+    secret: process.env.OAUTH_GITHUB_CLIENT_SECRET
+  },
+  auth: {
+    tokenHost: 'https://github.com',
+    tokenPath: '/login/oauth/access_token',
+    authorizePath: '/login/oauth/authorize'
+  }
+};
+```
+
+6. Paste code below inside auth.ts
+
+```
+import { IncomingMessage, ServerResponse } from 'http';
+import { AuthorizationCode } from 'simple-oauth2';
+import { randomBytes } from 'crypto';
+import { config } from './lib/config';
+
+export const randomString = () => randomBytes(4).toString(`hex`);
+
+export default async (req: IncomingMessage, res: ServerResponse) => {
+  const { host } = req.headers;
+  const client = new AuthorizationCode(config);
+  const authorizationUri = client.authorizeURL({
+    redirect_uri: `https://${host}/api/callback`,
+    scope: 'repo,user',
+    state: randomString()
+  });
+
+  res.writeHead(301, { Location: authorizationUri });
+  res.end();
+};
+```
+
+7. Paste code below inside callback.ts
+
+```
+import { IncomingMessage, ServerResponse } from 'http';
+import { AuthorizationCode } from 'simple-oauth2';
+import { config } from './lib/config';
+
+export default async (req: IncomingMessage, res: ServerResponse) => {
+  const { host } = req.headers;
+  const url = new URL(`https://${host}/${req.url}`);
+  const urlParams = url.searchParams;
+  const code = urlParams.get('code');
+  const client = new AuthorizationCode(config);
+  const tokenParams = {
+    code,
+    redirect_uri: `https://${host}/api/callback`
+  };
+
+  try {
+    const accessToken = await client.getToken(tokenParams);
+    const token = accessToken.token['access_token'];
+    const responseBody = renderBody('success', {
+      token
+    });
+
+    res.statusCode = 200;
+    res.end(responseBody);
+  } catch (e) {
+    res.statusCode = 200;
+    res.end(renderBody('error', e));
+  }
+};
+
+function renderBody(
+  status: string,
+  content: {
+    token: string;
+  }
+) {
+  return `
+    <script>
+      const receiveMessage = (message) => {
+        window.opener.postMessage(
+          'authorization:github:${status}:${JSON.stringify(
+    content
+  )}',
+          message.origin
+        );
+        window.removeEventListener("message", receiveMessage, false);
+      }
+      window.addEventListener("message", receiveMessage, false);
+      window.opener.postMessage("authorizing:github", "*");
+    </script>
+  `;
+}
+```
+
+## Create Github App
+
+1. Go to Github.com
+2. Click on "Account settings"
+3. Click on "Developer settings"
+4. Click on "New Github App"
+5. Enter Github App name
+6. Enter Homepage URL i.g. your-domain.com
+7. Enter Callback URL to be your-domain.com/api/callback
+8. Disable webhook
+9. Click on "Save changes"
+10. Your app will be created. Click on "Generate a new client secret" and Copy **Client ID** and **Client Secret**
+11. Click on "Permissions & events" on left navigation
+12. Under "Content", Set "Read & Write"
+13. Click on "Save changes"
+14. Click on "Install App" on left navigation
+15. Install app at your repository
+
+## Set Environment Variables on Vercel
