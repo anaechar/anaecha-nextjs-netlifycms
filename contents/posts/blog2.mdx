@@ -147,7 +147,7 @@ collections:
 npm install @types/react @types/simple-oauth2 simple-oauth2 --save-dev
 ```
 
-5. Paste code below inside config.ts
+5. Paste code below inside config.ts file
 
 ```
 export const config = {
@@ -163,7 +163,7 @@ export const config = {
 };
 ```
 
-6. Paste code below inside auth.ts
+6. Paste code below inside auth.ts file
 
 ```
 import { IncomingMessage, ServerResponse } from 'http';
@@ -187,7 +187,7 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
 };
 ```
 
-7. Paste code below inside callback.ts
+7. Paste code below inside callback.ts file
 
 ```
 import { IncomingMessage, ServerResponse } from 'http';
@@ -263,3 +263,10 @@ function renderBody(
 15. Install app at your repository
 
 ## Set Environment Variables on Vercel
+
+1. Go to your domain dashboard on Vercel
+2. Click on "Settings" on top navigation
+3. Click on "Environment Variables" on left navigation
+4. Enter names and values as followed:\
+   **OAUTH_GITHUB_CLIENT_ID** as NAME and your **Client ID** as VALUE\
+   **OAUTH_GITHUB_CLIENT_SECRET** as NAME and your **Client Secret** as VALUE
