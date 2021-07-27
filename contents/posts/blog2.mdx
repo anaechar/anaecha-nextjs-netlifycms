@@ -1,28 +1,45 @@
 ---
 draft: false
-title: Building Anaecha.com Part2
-slug: building-anaecha-com-part-2
-description: test
+title: Use Netlify CMS to manage MDXs for NextJs site on Vercel
+slug: use-netlify-cms-mdx-nextjs-vercel
+description: In this part, I will introduce "Netlify CMS" for our NextJs site
+  which is hosted on Vercel. Netlify CMS is a react application which supports
+  MDX format. It will work very well to build small site like personal blog.
 datetime: "1627378972594"
 category:
-  - การเงิน
+  - Coding
 robots: false
 ---
+In this part, I will introduce "[Netlify CMS](http://netlifycms.org)" for our NextJs site which is hosted on Vercel. Netlify CMS is a react application which supports MDX format. It will work very well to build small site like personal blog.
+
+To be clear, Netlify CMS is different from Netlify itself. Netlify provides services like Hosting and so on but Netlify CMS is a script to manage content.
+
+## Why Netlify CMS?
+
+Firstly, it is free. To build a personal blog, I want to minimize cost as much as possible because I want to experiment many things with this blog. It will keep changing and I do not want to pay for those changes.
+
+I have tried many CMS solutions; for example, [Contentful](https://www.contentful.com), [Strapi](https://strapi.io), [MongoDB](https://www.mongodb.com) and pure [MDX](https://mdxjs.com) editing. Actually, working with MDX alone is great experience but with more and more contents, it makes me frustrated. The good news is that Netlify CMS supports MDX format.
+
+Normally, Netlify CMS works perfectly while hosting on Netlify. However, it does not support some NextJs functionalities. This is why there are some workarounds involved to make it work on [Vercel](https://vercel.com).
 
 ## Introduce Netlify CMS
-1. Create "admin" folder inside "public"
+
+1. Create folders and files as followed
+
 ```
-- public
-    - admin
++ - contents
++   - posts
++   - posts-settings
++     - categories.yml
++   - pages
+  - public
++   - admin
++     - index.html
++     - config.yml
 ```
 
-2. Create "index.html" file 
-```
-- public
-    - admin
-        - index.html
-```
-and place the code below
+2. Paste the code below inside the **index.html** file 
+
 ```html
 <!doctype html>
 <html>
@@ -39,21 +56,14 @@ and place the code below
 </html>
 ```
 
-3. Create "config.yml" under admin folder
-```
-- public
-    - admin
-        - index.html
-        - config.yml
-```
+3. Paste code below inside the **config.yml** file
 
-Paste code below
 ```
 backend:
   name: github
-  repo: beforeifly1/anaecha-nextjs-netlifycms
+  repo: anaechar/anaecha-nextjs-netlifycms
   branch: main
-  base_url: https://anaecha-nextjs-netlifycms.vercel.app
+  base_url: https://anaecha.com
   auth_endpoint: api/auth
 media_library:
   name: cloudinary
@@ -61,11 +71,11 @@ media_library:
     cloud_name: "beforeifly"
     api_key: "822585855683452"
 collections:
-  - name: "posts"
-    label: "Posts"
+  - label: "Posts"
+    name: "posts"
     folder: "contents/posts"
-    extension: “mdx”
-    format: “frontmatter”
+    extension: mdx
+    format: frontmatter
     create: true
     view_filters:
       - label: "Drafts"
@@ -73,11 +83,11 @@ collections:
         pattern: true
     slug: "{{fields.slug}}"
     fields:
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
+      - {label: "Draft", name: "draft", widget: "boolean", default: false, required: false}
       - {label: "Title", name: "title", widget: "string", required: true}
       - {label: "Slug", name: "slug", widget: "string", required: true}
-      - {label: "Description", name: "description", widget: "string", required: true}
-      - {label: "Date", name: "date", widget: "date", format: "D MMM YYYY",required: true}
+      - {label: "Description", name: "description", widget: "string", default: "", required: false}
+      - {label: "DateTime", name: "datetime", widget: "datetime", format: "x", required: true}
       - label: "Category"
         name: "category"
         widget: "relation"
@@ -88,40 +98,74 @@ collections:
         value_field: "categories.*.name"
         multiple: true
         required: true
-      - {label: "Body", name: "body", widget: "markdown", required: true}
+      - {label: "Tags", name: "tags", widget: "string", default: "", required: false}
+      - {label: "Body", name: "body", widget: "markdown", default: "", required: true}
+      - {label: "Robots", name: "robots", widget: "boolean", default: true, required: false}
+  - label: "Pages"
+    name: "pages"
+    folder: "contents/pages"
+    extension: mdx
+    format: frontmatter
+    create: true
+    view_filters:
+      - label: "Drafts"
+        field: "draft"
+        pattern: true
+    slug: "{{fields.slug}}"
+    fields:
+      - {label: "Draft", name: "draft", widget: "boolean", default: false, required: false}
+      - {label: "Title", name: "title", widget: "string", required: true}
+      - {label: "Slug", name: "slug", widget: "string", required: true}
+      - {label: "Description", name: "description", widget: "string", default: "", required: false}
+      - {label: "Date", name: "date", widget: "date", format: "D MMM YYYY",required: true}
+      - {label: "Body", name: "body", widget: "markdown", default: "", required: false}
+      - {label: "Nav", name: "nav", widget: "boolean", default: false, required: false}
+      - {label: "Robots", name: "robots", widget: "boolean", default: true, required: false}
+  - label: "Settings"
+    name: "settings"
+    files: 
+      - label: "Categories"
+        name: "categories"
+        file: "contents/posts-settings/categories.yml"
+        fields:
+          - label: "Categories"
+            name: "categories"
+            widget: "list"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
 ```
 
-## Set up api
+## Set up API
+
 install @vercel/node simple-oauth2
 create auth.ts, callback.ts and /lib/oauth2.ts
 
-
-
-
-
 Install 
+
 ```
 npm install @vercel/node --save-dev
 ```
+
 https://vercel.com/docs/runtimes
-
-
 
 2. We will start with fresh and clean project. So, we will delete some files.
 
 Delete "Home.module.css"
+
 ```
 - styles
     - Home.module.css
 ```
 
 Delete "vercel.svg"
+
 ```
 - public
     - vercel.svg
 ```
 
 Delete "Hello.js"
+
 ```
 - pages
   - api
