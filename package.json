@@ -16,6 +16,7 @@
     "simple-oauth2": "^4.2.0"
   },
   "devDependencies": {
+    "@types/react": "^17.0.15",
     "eslint": "7.31.0",
     "eslint-config-next": "11.0.1"
   }
