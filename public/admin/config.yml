@@ -21,13 +21,13 @@ collections:
       - label: "Drafts"
         field: "draft"
         pattern: true
-      - label: "Cat: Coding"
+      - label: "Coding"
         field: "category"
         pattern: "Coding"
     view_groups:
-      - label: "Year"
+      - label: "Month-Year"
         field: "publishedAt"
-        pattern: \d{4}
+        pattern: [a-zA-z]{3} \d{4}
     slug: "{{fields.slug}}"
     fields:
       - {label: "Draft", name: "draft", widget: "boolean", default: false, required: false}
