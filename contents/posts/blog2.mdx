@@ -64,21 +64,16 @@ Netlify CMS works with Github repository for creating, editing and deleting. Onc
 </html>
 ```
 
-3. Paste code below inside the **config.yml** file, this will configure Netlify CMS settings.\
+3. Paste code below inside the **config.yml** file (Replace your-repo and your-base-url with yours), this will configure Netlify CMS settings.\
    To learn more about this file, visit this [documentation](https://www.netlifycms.org/docs/configuration-options/).
 
 ```
 backend:
   name: github
-  repo: anaechar/anaecha-nextjs-netlifycms
+  repo: your-repo # example: anaechar/anaecha-nextjs-netlifycms
   branch: main
-  base_url: https://anaecha.com
+  base_url: your-base-url # example: https://anaecha.com
   auth_endpoint: api/auth
-media_library:
-  name: cloudinary
-  config:
-    cloud_name: "beforeifly"
-    api_key: "822585855683452"
 collections:
   - label: "Posts"
     name: "posts"
@@ -250,6 +245,8 @@ function renderBody(
 8. Push your codes to the repository by running this code
 
 ```
+git add .
+git commit -m "netlifycms"
 git push origin main
 ```
 
@@ -282,7 +279,7 @@ git push origin main
 
 ## Test Netlify CMS
 
-1. Go to your-domain/admin/index.html
+1. Go to your-domain.com/admin/index.html
 2. Click on "Sign in with Github"
 3. If authorization is success, you will see Netlify CMS dashboard. Test creating posts and pages. \
    \
@@ -295,3 +292,10 @@ git pull origin main
 That is all. Congratulation!!\
 \
 In the next part, I will code to display content created by Netlify CMS.
+
+Credits:
+
+* <https://www.youtube.com/watch?v=pPzZrWwvDNg>\
+  <https://github.com/robinpokorny/netlify-cms-now>
+* <https://github.com/ublabs/netlify-cms-oauth>
+* [NetlifyCMS with GitHub OAuth authentication hosted on Vercel](https://www.component-driven.dev/articles/netlify-cms-github-oauth-vercel)
