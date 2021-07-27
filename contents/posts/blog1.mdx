@@ -10,7 +10,7 @@ title: Building Anaecha.com Part 1
 5. Click on "Create repository" button
 
 ## Create Next.Js App
-1. Run this command (app-name can be changed.)
+Run this command (app-name can be changed.)
 ```
 npx create-next-app app-name
 ```
@@ -27,27 +27,6 @@ npm run dev
 ```
 Visit your site at [http://localhost:3000](http://localhost:3000)
 
-2. We will start with fresh and clean project. So, we will delete some files.
-
-Delete "Home.module.css"
-```
-- styles
-    - Home.module.css
-```
-
-Delete "vercel.svg"
-```
-- public
-    - vercel.svg
-```
-
-Delete "Hello.js"
-```
-- pages
-  - api
-    - hello.js
-```
-
 ## First push to the github repository
 Run these commands (replace your-github-url)
 ```
@@ -57,14 +36,13 @@ git commit -m "first commit"
 git remote add origin your-github-url
 git push -u origin main
 ```
-If you are already in another github remote, run this command to change github remote (replace your-github/your-github-remote with yours). otherwise, you will get an error.
-```
-git remote set-url origin git@github.com:your-github/your-github-remote
-```
+
 To confirm the remote, you can run this command.
 ```
 git remote -v
 ```
+
+If you use SSH key, Make sure you already register it.
 
 ## Publish via Vercel
 1. Go to [Vercel site](https://vercel.com) and sign in
@@ -72,85 +50,52 @@ git remote -v
 3. Click on "Import" from the repository
 4. Click on "Skip" to build a team
 5. Click on "Deploy"
-6. Copy URL path to the site
+6. Once the process is finished, Click on "Visit" to test the site.
 
-## Introduce Netlify CMS
-1. Create "admin" folder inside "public"
-```
-- public
-    - admin
-```
+## [Optional] Add a Domain name
+1. Go to your site dashboard on Vercel
+2. Click on "Settings" tab
+3. Click on "Domains" on left navigation
+4. Enter your registered domain name and Click "Add"
+5. Select your domain base and Click "Add". For my case, I use "anaecha.com" and redirect "www.anaecha.com" to it.
 
-2. Create "index.html" file 
-```
-- public
-    - admin
-        - index.html
-```
-and place the code below
-```html
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content Manager</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</head>
-<body>
-  <!-- Include the script that builds the page and powers Netlify CMS -->
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-</body>
-</html>
-```
+Ref: [Vercel Custom Domain](https://vercel.com/docs/custom-domains)
 
-3. Create "config.yml"
-```
-backend:
-  name: github
-  repo: beforeifly1/anaecha-nextjs-netlifycms
-  branch: main
-  base_url: https://anaecha-nextjs-netlifycms.vercel.app
-  auth_endpoint: api/auth
-media_library:
-  name: cloudinary
-  config:
-    cloud_name: "beforeifly"
-    api_key: "822585855683452"
-collections:
-  - name: "posts"
-    label: "Posts"
-    folder: "contents/posts"
-    extension: “mdx”
-    format: “frontmatter”
-    create: true
-    view_filters:
-      - label: "Drafts"
-        field: "draft"
-        pattern: true
-    slug: "{{fields.slug}}"
-    fields:
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
-      - {label: "Title", name: "title", widget: "string", required: true}
-      - {label: "Slug", name: "slug", widget: "string", required: true}
-      - {label: "Description", name: "description", widget: "string", required: true}
-      - {label: "Date", name: "date", widget: "date", format: "D MMM YYYY",required: true}
-      - label: "Category"
-        name: "category"
-        widget: "relation"
-        collection: "settings"
-        file: "categories"
-        search_fields: ["categories.*.name"]
-        display_fields: ['categories.*.name']
-        value_field: "categories.*.name"
-        multiple: true
-        required: true
-      - {label: "Body", name: "body", widget: "markdown", required: true}
-```
+## Link Google Domain to Vercel
+1. Go to your [Google Domains](https://domains.google.com)'s dashboard
+2. Click on your registered domain name
+3. Click on "DNS" on left navigation
+4. Copy "Value" from Vercel and Create records as followed
+<table>
+<thead>
+<tr>
+<td>Host name</td>
+<td>Type</td>
+<td>TTL</td>
+<td>Data</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>A</td>
+<td>1 hour</td>
+<td>data-from-vercel</td>
+</tr>
+<tr>
+<td>www.yourdomain.com</td>
+<td>CNAME</td>
+<td>1 hour</td>
+<td>data-from-vercel</td>
+</tr>
+</tbody>
+</table>
+5. Click on "Save", this process might take some time.
 
-Install 
-```
-npm install @vercel/node --save-dev
-```
-https://vercel.com/docs/runtimes
-
+## Complete Vercel Domain Configuration
+1. Go to "Domains" settings for your Vercel App
+2. Under your-domain.vercel.app, Click on "Edit"
+3. Under "Redirect to", Select your-domain.com
+4. Click on "Refresh" buttons on your-domain.com and www.your-domain.com
+5. If the process is completed, "Valid Configuration" will be shown.
+6. Try to visit your-domain.com and www.your-domain.com
