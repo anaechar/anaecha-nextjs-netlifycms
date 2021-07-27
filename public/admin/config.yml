@@ -16,14 +16,14 @@ collections:
     extension: mdx
     format: frontmatter
     create: true
-    sortable_fields: ["publishedAt"]
+    sortable_fields: ["timestamp"]
     view_filters:
       - label: "Drafts"
         field: "draft"
         pattern: true
-      - label: "category"
+      - label: "Cat: Coding"
         field: "category"
-        pattern: "*"
+        pattern: "Coding"
     view_groups:
       - label: "Year"
         field: "publishedAt"
@@ -34,7 +34,7 @@ collections:
       - {label: "Title", name: "title", widget: "string", required: true}
       - {label: "Slug", name: "slug", widget: "string", required: true}
       - {label: "Description", name: "description", widget: "string", default: "", required: false}
-      - {label: "Published At", name: "publishedAt", widget: "datetime", format: "x", required: true}
+      - {label: "Published At", name: "publishedAt", widget: "date", format: "D MMM YYYY", required: true}
       - label: "Category"
         name: "category"
         widget: "relation"
@@ -48,6 +48,7 @@ collections:
       - {label: "Tags", name: "tags", widget: "string", default: "", required: false}
       - {label: "Body", name: "body", widget: "markdown", default: "", required: true}
       - {label: "Robots", name: "robots", widget: "boolean", default: true, required: false}
+      - {label: "Timestamp", name: "timestamp", widget: "datetime", format: "x", required: true}
   - label: "Pages"
     name: "pages"
     folder: "contents/pages"
@@ -64,7 +65,7 @@ collections:
       - {label: "Title", name: "title", widget: "string", required: true}
       - {label: "Slug", name: "slug", widget: "string", required: true}
       - {label: "Description", name: "description", widget: "string", default: "", required: false}
-      - {label: "Date", name: "date", widget: "date", format: "D MMM YYYY",required: true}
+      - {label: "Published At", name: "publishedAt", widget: "date", format: "D MMM YYYY",required: true}
       - {label: "Body", name: "body", widget: "markdown", default: "", required: false}
       - {label: "Nav", name: "nav", widget: "boolean", default: false, required: false}
       - {label: "Robots", name: "robots", widget: "boolean", default: true, required: false}
