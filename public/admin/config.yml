@@ -21,11 +21,14 @@ collections:
       - label: "Drafts"
         field: "draft"
         pattern: true
-      - label: "Coding"
+      - label: "Robots"
+        field: "robots"
+        pattern: false
+      - label: "#Coding"
         field: "category"
         pattern: "Coding"
     view_groups:
-      - label: "Time"
+      - label: "Month-Year:"
         field: "publishedDate"
         pattern: \w{3}.\d{4}
     slug: "{{fields.slug}}"
