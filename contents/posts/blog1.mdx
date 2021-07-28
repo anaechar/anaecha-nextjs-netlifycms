@@ -1,16 +1,21 @@
 ---
 draft: false
-publishedDate: "27 Jul 2021"
-title: Building Anaecha.com Part 1
-slug: building-anaecha-part-1
-description: test
+publishedDate: 27 Jul 2021
+title: Create NextJs Blog and Deploy on Vercel with Custom Google Domain
+slug: create-nextjs-blog-vercel-google-domain
 category:
-  - การเงิน
+  - Coding
+description: I will walk you through creating and deploying a NextJs site to
+  Vercel as well as registering a domain name and pointing to the site.
 robots: false
-timestamp: "1627379057803"
+timestamp: "1627482489"
 ---
+I will walk you through creating and deploying a NextJs site to Vercel as well as registering a domain name and pointing to the site.
+
+This article is a part of series: Building Anaecha.com.
 
 ## Create Github Repositories
+
 1. Go to [github.com](https://github.com) and sign in
 2. Click on "New" button to create a new repository
 3. Enter a repository name
@@ -18,41 +23,51 @@ timestamp: "1627379057803"
 5. Click on "Create repository" button
 
 ## Create Next.Js App
-Run this command (app-name can be changed.)
-```
-npx create-next-app app-name
-```
-This will create a folder named "app-name".
 
-If you already have a folder, you can run this command instead while you are in the folder.
+1. Run this command (Replace <your-app-name> with yours)
+
+This will create a directory named "your-app-name".
+
+```
+npx create-next-app <your-app-name>
+```
+
+If you already have a directory, Go to your directory and run this command instead.
+
 ```
 npx create-next-app .
 ```
 
-Now, you can test your site with this command.
+2. Now, you can test your site with this command.
+
 ```
 npm run dev
 ```
-Visit your site at [http://localhost:3000](http://localhost:3000)
+
+3. Visit your site at <http://localhost:3000>
 
 ## First push to the github repository
-Run these commands (replace your-github-url)
+
+Run these commands (Replace <your-github-url> with yours)
+
 ```
 git init
 git add .
 git commit -m "first commit"
-git remote add origin your-github-url
+git remote add origin <your-github-url>
 git push -u origin main
 ```
 
 To confirm the remote, you can run this command.
+
 ```
 git remote -v
 ```
 
 If you use SSH key, Make sure you already register it.
 
-## Publish via Vercel
+## Deploy on Vercel
+
 1. Go to [Vercel site](https://vercel.com) and sign in
 2. Click on "New Project" button
 3. Click on "Import" from the repository
@@ -60,7 +75,12 @@ If you use SSH key, Make sure you already register it.
 5. Click on "Deploy"
 6. Once the process is finished, Click on "Visit" to test the site.
 
-## [Optional] Add a Domain name
+## Register a Domain name
+
+Register a domain name for the site, you can choose any provider based on your preference. In my case, I choose [Google Domains](https://domains.google).
+
+## Add a Domain name
+
 1. Go to your site dashboard on Vercel
 2. Click on "Settings" tab
 3. Click on "Domains" on left navigation
@@ -70,40 +90,20 @@ If you use SSH key, Make sure you already register it.
 Ref: [Vercel Custom Domain](https://vercel.com/docs/custom-domains)
 
 ## Link Google Domain to Vercel
+
 1. Go to your [Google Domains](https://domains.google.com)'s dashboard
 2. Click on your registered domain name
 3. Click on "DNS" on left navigation
 4. Copy "Value" from Vercel and Create records as followed
-<table>
-<thead>
-<tr>
-<td>Host name</td>
-<td>Type</td>
-<td>TTL</td>
-<td>Data</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td>A</td>
-<td>1 hour</td>
-<td>data-from-vercel</td>
-</tr>
-<tr>
-<td>www.yourdomain.com</td>
-<td>CNAME</td>
-<td>1 hour</td>
-<td>data-from-vercel</td>
-</tr>
-</tbody>
-</table>
 5. Click on "Save", this process might take some time.
 
 ## Complete Vercel Domain Configuration
+
 1. Go to "Domains" settings for your Vercel App
 2. Under your-domain.vercel.app, Click on "Edit"
 3. Under "Redirect to", Select your-domain.com
 4. Click on "Refresh" buttons on your-domain.com and www.your-domain.com
 5. If the process is completed, "Valid Configuration" will be shown.
 6. Try to visit your-domain.com and www.your-domain.com
+
+That is all. In the next part, I will introduce Netlify CMS to our blog.
