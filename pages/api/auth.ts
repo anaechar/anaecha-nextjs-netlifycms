@@ -1,7 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { AuthorizationCode } from 'simple-oauth2';
 import { randomBytes } from 'crypto';
-import config from '../../config/oauth';
+import config from './lib/oauth';
 
 export const randomString = () => randomBytes(4).toString(`hex`);
 
