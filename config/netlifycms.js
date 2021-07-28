@@ -29,7 +29,7 @@ export default {
                 {label: 'Robots', field: 'robots', pattern: false},
             ],
             view_groups: [
-                {label: 'Month-Year:', field: 'publishedDate', pattern: '\d{4}'}
+                {label: 'Month-Year:', field: 'publishedDate', pattern: '\\w{3}.\\d{4}'}
             ],
             slug: '{{fields.slug}}',
             fields: [
@@ -60,7 +60,7 @@ export default {
                 {label: 'Robots', field: 'robots', pattern: false}
             ],
             view_groups: [
-                {label: 'Month-Year:', field: 'publishedDate', pattern: '/\w{3}.\d{4}/g'}
+                {label: 'Month-Year:', field: 'publishedDate', pattern: '\\w{3}.\\d{4}'}
             ],
             slug: '{{fields.slug}}',
             fields: [
