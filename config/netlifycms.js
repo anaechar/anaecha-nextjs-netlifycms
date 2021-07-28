@@ -9,8 +9,8 @@ export default {
     media_library: {
         name: 'cloudinary',
         config: {
-            cloud_name: 'beforeifly',
-            api_key: '822585855683452'
+            cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+            api_key: process.env.CLOUDINARY_API_KEY
         } 
     },
     collections: [
@@ -28,7 +28,7 @@ export default {
                 {label: 'Robots', field: 'robots', pattern: false},
             ],
             view_groups: [
-                {label: 'Month-Year:', field: 'publishedDate', pattern: '/\w{3}.\d{4}/g'}
+                {label: 'Month-Year:', field: 'publishedDate', pattern: '\d{4}'}
             ],
             slug: '{{fields.slug}}',
             fields: [
@@ -80,7 +80,8 @@ export default {
                 {
                     label: 'Categories',
                     name: 'categories',
-                    file: 'contents/posts-settings/categories.yml',
+                    editor: {preview: false},
+                    file: 'contents/posts-settings/categories.json',
                     fields: [
                         {
                             label: 'Categories',
