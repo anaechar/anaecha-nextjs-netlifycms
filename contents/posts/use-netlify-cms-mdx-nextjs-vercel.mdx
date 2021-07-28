@@ -1,68 +1,70 @@
 ---
 draft: false
-publishedDate: "27 Jul 2021"
+publishedDate: 27 Jul 2021
 title: Use Netlify CMS to manage MDXs for NextJs site on Vercel
 slug: use-netlify-cms-mdx-nextjs-vercel
-description: In this part, I will introduce "Netlify CMS" for our NextJs site
-  which is hosted on Vercel. Netlify CMS is a react application which supports
-  MDX format. It will work very well to build small site like personal blog.
 category:
   - Coding
+description: In this part, I will introduce Netlify CMS to our NextJs site which
+  is hosted on Vercel. It will help managing MDX contents in our Github
+  repository.
 robots: false
 timestamp: "1627378972594"
 ---
-In this part, I will introduce "[Netlify CMS](http://netlifycms.org)" for our NextJs site which is hosted on Vercel. Netlify CMS is a react application which supports MDX format. It will work very well to build small site like personal blog.
+In this part, I will introduce **Netlify CMS** to our NextJs site which is hosted on Vercel. It will help managing MDX contents in our Github repository.
 
-To be clear, Netlify CMS is different from Netlify itself. Netlify provides services like Hosting and so on but Netlify CMS is a script to manage content.
-
-Normally, Netlify CMS works perfectly while hosting on Netlify. However, it does not support some NextJs functionalities. This is why there are some workarounds involved to make it work on [Vercel](https://vercel.com).
+To be clear, [Netlify CMS](https://www.netlifycms.org) is different from [Netlify](https://www.netlify.com). Netlify is a platform providing services, for example, building and deploying sites but Netlify CMS is a script to manage content.
 
 ## Why Netlify CMS?
 
-Firstly, it is free. To build a personal blog, I want to minimize cost as much as possible because I want to experiment many things with this blog. It will keep changing and I do not want to pay for those changes.
-
-I have tried many CMS solutions; for example, [Contentful](https://www.contentful.com), [Strapi](https://strapi.io), [MongoDB](https://www.mongodb.com) and pure [MDX](https://mdxjs.com) editing. Actually, working with MDX alone is great experience but with more and more contents, it makes me frustrated. The good news is that Netlify CMS supports MDX format.
-
-Netlify CMS works with Github repository for creating, editing and deleting. Once there are changes in the repository, Vercel will know and then re-build the site.
+Netlify CMS is a free open source and git-based react application. It works in client side to manage MDX contents inside the repository. Once there are changes in the repository, Vercel will know and re-build the site for us. Becuase of these reasons, it is a perfect couple for NextJs site.
 
 ## Introduce Netlify CMS
 
 1. Create folders and files as followed
 
 ```
++ - config
++   - oauth.js
++   - netlifycms.js
 + - contents
 +   - posts
-+   - posts-settings
-+     - categories.yml
 +   - pages
   - pages
++   - admin.js
     - api
-+     - lib
-+       - config.ts
 +     - auth.ts
 +     - callback.ts
-  - public
-+   - admin
-+     - index.html
-+     - config.yml
 ```
 
-2. Paste the code below inside the **index.html** file, this will create admin page for Netlify CMS.
+2. Paste the code below inside the **/pages/admin.js** file \
+   This will create the main page for Netlify CMS. 
 
 ```html
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content Manager</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</head>
-<body>
-  <!-- Include the script that builds the page and powers Netlify CMS -->
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-</body>
-</html>
+import { useEffect } from 'react';
+import { netlifyCMSConfig } from '../config/netlifycms';
+
+export default function AdminPage({ config }) {
+    useEffect(() => {
+        ;(async () => {
+            const CMS = (await import('netlify-cms-app')).default
+            const cloudinary = (await import('netlify-cms-media-library-cloudinary')).default
+            CMS.registerMediaLibrary(cloudinary);
+            CMS.init({ config });
+        })()
+    }, []);
+
+  return <div />;
+};
+
+export async function getStaticProps() {
+    const config = netlifyCMSConfig(process.env.CLOUDINARY_CLOUD_NAME,process.env.CLOUDINARY_API_KEY);
+    return {
+        props: {
+            config
+        }
+    };
+};
 ```
 
 3. Paste code below inside the **config.yml** file (Replace your-repo and your-base-url with yours), this will configure Netlify CMS settings.\
