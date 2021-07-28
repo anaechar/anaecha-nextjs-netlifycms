@@ -38,7 +38,7 @@ Netlify CMS is a free open source and git-based react application. It works in c
 + .env.local
 ```
 
-2. Install **typescript**, **@types/react** and **@types/simple-oauth2[](https://www.npmjs.com/package/simple-oauth2)**
+2. Install **typescript**, **@types/react** and **@types/simple-oauth2**[](https://www.npmjs.com/package/simple-oauth2)
 
 ```
 npm install typescript @types/react @types/simple-oauth2 simple-oauth2 --save-dev
@@ -336,9 +336,10 @@ git push origin main
 14. Click on "Install App" on left navigation
 15. Install app at your repository
 
+## Copy Cloudinary Cloud Name and API Key
 
-
-
+1. Go to your cloudinary dashboard
+2. Copy your **Cloud Name** and **API Key**
 
 ## Set Environment Variables on Vercel
 
@@ -347,15 +348,28 @@ git push origin main
 3. Click on "Environment Variables" on left navigation
 4. Enter names and values as followed:\
    **OAUTH_GITHUB_CLIENT_ID** as NAME and your **Client ID** as VALUE\
-   **OAUTH_GITHUB_CLIENT_SECRET** as NAME and your **Client Secret** as VALUE
+   **OAUTH_GITHUB_CLIENT_SECRET** as NAME and your **Client Secret** as VALUE\
+   **CLOUDINARY_CLOUD_NAME** as NAME and your **Cloud Name** as VALUE\
+   **CLOUDINARY_API_KEY** as NAME and your **API Key** as VALUE
 
 ## Test Netlify CMS
 
-1. Go to your-domain.com/admin/index.html
-2. Click on "Sign in with Github"
-3. If authorization is success, you will see Netlify CMS dashboard. Test creating posts and pages. \
-   \
-   The related MDX files will be stored inside /contents/posts and /content/pages. It will not reflect in your code editor. To update codes inside your code editor, run this command.
+1. Update your .env.local file (Replace <...> with yours)
+
+```
+OAUTH_GITHUB_CLIENT_ID=<your-github-client-id>
+OAUTH_GITHUB_CLIENT_SECRET=<your-github-client-secret>
+CLOUDINARY_CLOUD_NAME=<your-cloud-name>
+CLOUDINARY_API_KEY=<your-api-key>
+```
+
+2. Go to <your-domain-name>/admin
+
+3. Click on "Sign in with Github"
+
+If authorization is success, you will see Netlify CMS dashboard. Test all functionalities. \
+\
+The related MDX files will be stored inside /contents/posts and /content/pages. It will not reflect in your code editor. To update codes inside your code editor, run this command.
 
 ```
 git pull origin main
