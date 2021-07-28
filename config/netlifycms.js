@@ -1,10 +1,10 @@
-export function netlifyCMSConfig(cloudName, apiKey) {
+export function netlifyCMSConfig(repo, base_url, cloudName, apiKey) {
     return {
         backend: {
             name: 'github',
-            repo: 'anaechar/anaecha-nextjs-netlifycms',
+            repo,
             branch: 'main',
-            base_url: 'https://anaecha.com',
+            base_url,
             auth_endpoint: 'api/auth'
         },
         media_library: {

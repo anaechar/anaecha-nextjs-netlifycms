@@ -15,7 +15,7 @@ export default function AdminPage({ config }) {
 };
 
 export async function getStaticProps() {
-    const config = netlifyCMSConfig(process.env.CLOUDINARY_CLOUD_NAME,process.env.CLOUDINARY_API_KEY);
+    const config = netlifyCMSConfig(process.env.GITHUB_REPO,process.env.GITHUB_BASE_URL,process.env.CLOUDINARY_CLOUD_NAME,process.env.CLOUDINARY_API_KEY);
     return {
         props: {
             config
