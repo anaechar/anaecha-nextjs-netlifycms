@@ -35,6 +35,7 @@ Netlify CMS is a free open source and git-based react application. It works in c
     - api
 +     - auth.ts
 +     - callback.ts
++ .env.local
 ```
 
 2. Install **typescript**, **@types/react** and **@types/simple-oauth2[](https://www.npmjs.com/package/simple-oauth2)**
@@ -212,7 +213,7 @@ export default {
 
 7. Paste code below inside **/pages/api/auth.ts** file
 
-We will use NextJs Severless Function provided by Vercel to handling authorization via API endpoints.
+We will use NextJs Severless Function provided by Vercel to handling authorization via API endpoints. Vercel will convert javascripts (.js) or typescript (.ts) files under /api folder to be serverless functions ([see documentation](https://vercel.com/docs/serverless-functions/supported-languages#node.js)).
 
 Credits:
 
@@ -300,7 +301,16 @@ function renderBody(
 }
 ```
 
-8. Push your codes to the repository by running these commands
+8. Insert Environment Variables into .env.local file
+
+```
+OAUTH_GITHUB_CLIENT_ID=
+OAUTH_GITHUB_CLIENT_SECRET=
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+```
+
+Push your codes to the repository by running these commands
 
 ```
 git add .
@@ -315,8 +325,8 @@ git push origin main
 3. Click on "Developer settings"
 4. Click on "New Github App"
 5. Enter Github App name
-6. Enter Homepage URL i.g. your-domain.com
-7. Enter Callback URL to be your-domain.com/api/callback
+6. Enter Homepage URL i.g. <your-domain-name>
+7. Enter Callback URL to be <your-domain-name>/api/callback
 8. Disable webhook
 9. Click on "Save changes"
 10. Your app will be created. Click on "Generate a new client secret" and Copy **Client ID** and **Client Secret**
@@ -325,6 +335,10 @@ git push origin main
 13. Click on "Save changes"
 14. Click on "Install App" on left navigation
 15. Install app at your repository
+
+
+
+
 
 ## Set Environment Variables on Vercel
 
