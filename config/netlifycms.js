@@ -86,7 +86,7 @@ export function netlifyCMSConfig(cloudName, apiKey) {
                         create: true,
                         editor: {preview: false},
                         sortable_fields: ['name'],
-                        file: 'contents/posts-settings/categories.json',
+                        file: 'contents/categories.json',
                         fields: [
                             {
                                 label: 'Categories',
