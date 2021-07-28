@@ -1,7 +1,10 @@
 {
-    "categories": [
-      {
-        "name": "Coding"
-      }
-    ]
+  "categories": [
+    {
+      "name": "Coding"
+    },
+    {
+      "name": "NFT"
+    }
+  ]
 }
