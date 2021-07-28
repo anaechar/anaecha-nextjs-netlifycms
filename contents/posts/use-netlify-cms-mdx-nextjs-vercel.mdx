@@ -37,8 +37,21 @@ Netlify CMS is a free open source and git-based react application. It works in c
 +     - callback.ts
 ```
 
-2. Paste the code below inside the **/pages/admin.js** file \
-   This will create the main page for Netlify CMS. 
+2. Install **typescript**, **@types/react** and **@types/simple-oauth2[](https://www.npmjs.com/package/simple-oauth2)**
+
+```
+npm install typescript @types/react @types/simple-oauth2 simple-oauth2 --save-dev
+```
+
+3. Install **[simple-oauth2](https://www.npmjs.com/package/simple-oauth2)**, **[netlify-cms-app](https://www.npmjs.com/package/netlify-cms-app)** and **[netlify-cms-media-library-cloudinary](https://www.npmjs.com/package/netlify-cms-media-library-cloudinary)**
+
+```
+npm install simple-oauth2 netlify-cms-app netlify-cms-media-library-cloudinary
+```
+
+4. Paste the code below inside the **/pages/admin.js** file
+
+This will create the main page for Netlify CMS. When I wrote my code, I faced a problem of "window is not define.". We have to give Manuel Kruisz a credit for the [solution](https://www.manuelkruisz.com/blog/posts/custom-previews-nextjs-netlifycms).
 
 ```html
 import { useEffect } from 'react';
@@ -67,91 +80,124 @@ export async function getStaticProps() {
 };
 ```
 
-3. Paste code below inside the **config.yml** file (Replace your-repo and your-base-url with yours), this will configure Netlify CMS settings.\
-   To learn more about this file, visit this [documentation](https://www.netlifycms.org/docs/configuration-options/).
+5. Paste code below inside the **/config/netlifycms.js** file
+
+This file will serve as settings for Netlify CMS. It is customizable, to learn more about the settings, visit this [documentation](https://www.netlifycms.org/docs/configuration-options/).
 
 ```
-backend:
-  name: github
-  repo: your-repo # example: anaechar/anaecha-nextjs-netlifycms
-  branch: main
-  base_url: your-base-url # example: https://anaecha.com
-  auth_endpoint: api/auth
-collections:
-  - label: "Posts"
-    name: "posts"
-    folder: "contents/posts"
-    extension: mdx
-    format: frontmatter
-    create: true
-    view_filters:
-      - label: "Drafts"
-        field: "draft"
-        pattern: true
-    slug: "{{fields.slug}}"
-    fields:
-      - {label: "Draft", name: "draft", widget: "boolean", default: false, required: false}
-      - {label: "Title", name: "title", widget: "string", required: true}
-      - {label: "Slug", name: "slug", widget: "string", required: true}
-      - {label: "Description", name: "description", widget: "string", default: "", required: false}
-      - {label: "DateTime", name: "datetime", widget: "datetime", format: "x", required: true}
-      - label: "Category"
-        name: "category"
-        widget: "relation"
-        collection: "settings"
-        file: "categories"
-        search_fields: ["categories.*.name"]
-        display_fields: ['categories.*.name']
-        value_field: "categories.*.name"
-        multiple: true
-        required: true
-      - {label: "Tags", name: "tags", widget: "string", default: "", required: false}
-      - {label: "Body", name: "body", widget: "markdown", default: "", required: true}
-      - {label: "Robots", name: "robots", widget: "boolean", default: true, required: false}
-  - label: "Pages"
-    name: "pages"
-    folder: "contents/pages"
-    extension: mdx
-    format: frontmatter
-    create: true
-    view_filters:
-      - label: "Drafts"
-        field: "draft"
-        pattern: true
-    slug: "{{fields.slug}}"
-    fields:
-      - {label: "Draft", name: "draft", widget: "boolean", default: false, required: false}
-      - {label: "Title", name: "title", widget: "string", required: true}
-      - {label: "Slug", name: "slug", widget: "string", required: true}
-      - {label: "Description", name: "description", widget: "string", default: "", required: false}
-      - {label: "Date", name: "date", widget: "date", format: "D MMM YYYY",required: true}
-      - {label: "Body", name: "body", widget: "markdown", default: "", required: false}
-      - {label: "Nav", name: "nav", widget: "boolean", default: false, required: false}
-      - {label: "Robots", name: "robots", widget: "boolean", default: true, required: false}
-  - label: "Settings"
-    name: "settings"
-    files: 
-      - label: "Categories"
-        name: "categories"
-        file: "contents/posts-settings/categories.yml"
-        fields:
-          - label: "Categories"
-            name: "categories"
-            widget: "list"
-            fields:
-              - {label: "Name", name: "name", widget: "string"}
+export function netlifyCMSConfig(cloudName, apiKey) {
+    return {
+        backend: {
+            name: 'github',
+            repo: 'anaechar/anaecha-nextjs-netlifycms',
+            branch: 'main',
+            base_url: 'https://anaecha.com',
+            auth_endpoint: 'api/auth'
+        },
+        media_library: {
+            name: 'cloudinary',
+            config: {
+                cloud_name: cloudName,
+                api_key: apiKey
+            } 
+        },
+        collections: [
+            {
+                label: 'Posts',
+                name: 'posts',
+                folder: 'contents/posts',
+                extension: 'mdx',
+                format: 'frontmatter',
+                create: true,
+                editor: {preview: false},
+                sortable_fields: ['timestamp'],
+                view_filters: [
+                    {label: 'Drafts', field: 'draft', pattern: true},
+                    {label: '#Coding', field: 'category', pattern: 'Coding'},
+                    {label: 'Robots', field: 'robots', pattern: false},
+                ],
+                view_groups: [
+                    {label: 'Month-Year:', field: 'publishedDate', pattern: '\\w{3}.\\d{4}'}
+                ],
+                slug: '{{fields.slug}}',
+                fields: [
+                    {label: 'Draft', name: 'draft', widget: 'boolean', default: false, required: false},
+                    {label: 'Published Date', name: 'publishedDate', widget: 'date', format: 'D MMM YYYY', required: true},
+                    {label: 'Title', name: 'title', widget: 'string', required: true},
+                    {label: 'Slug', name: 'slug', widget: 'string', required: true},
+                    {label: 'Category', name: 'category', widget: 'relation', collection: 'settings', file: 'categories', search_fields: ['categories.*.name'], display_fields: ['categories.*.name'], value_field: 'categories.*.name', multiple: true, required: true},
+                    {label: 'Tags', name: 'tags', widget: 'string', default: '', required: false},
+                    {label: 'Description', name: 'description', widget: 'string', default: '', required: false},
+                    {label: 'Body', name: 'body', widget: 'markdown', default: '', required: true},
+                    {label: 'Robots', name: 'robots', widget: 'boolean', default: true, required: false},
+                    {label: 'Timestamp', name: 'timestamp', widget: 'datetime', format: 'X', required: true}
+                ]
+            },
+            {
+                label: 'Pages',
+                name: 'pages',
+                folder: 'contents/pages',
+                extension: 'mdx',
+                format: 'frontmatter',
+                create: true,
+                editor: {preview: false},
+                sortable_fields: ['timestamp'],
+                view_filters: [
+                    {label: 'Drafts', field: 'draft', pattern: true},
+                    {label: 'Nav', field: 'nav', pattern: true},
+                    {label: 'Robots', field: 'robots', pattern: false}
+                ],
+                view_groups: [
+                    {label: 'Month-Year:', field: 'publishedDate', pattern: '\\w{3}.\\d{4}'}
+                ],
+                slug: '{{fields.slug}}',
+                fields: [
+                    {label: 'Draft', name: 'draft', widget: 'boolean', default: false, required: false},
+                    {label: 'Published Date', name: 'publishedDate', widget: 'date', format: 'D MMM YYYY',required: true},
+                    {label: 'Title', name: 'title', widget: 'string', required: true},
+                    {label: 'Slug', name: 'slug', widget: 'string', required: true},
+                    {label: 'Description', name: 'description', widget: 'string', default: '', required: false},
+                    {label: 'Body', name: 'body', widget: 'markdown', default: '', required: false},
+                    {label: 'Nav', name: 'nav', widget: 'boolean', default: false, required: false},
+                    {label: 'Robots', name: 'robots', widget: 'boolean', default: true, required: false},
+                    {label: 'Timestamp', name: 'timestamp', widget: 'datetime', format: 'X', required: true}
+                ]
+            },
+            {
+                label: 'Settings',
+                name: 'settings',
+                files: [
+                    {
+                        label: 'Categories',
+                        name: 'categories',
+                        create: true,
+                        editor: {preview: false},
+                        sortable_fields: ['name'],
+                        file: 'contents/categories.json',
+                        fields: [
+                            {
+                                label: 'Categories',
+                                name: 'categories',
+                                widget: 'list',
+                                fields: [
+                                    {label: 'Name', name: 'name', widget: 'string'}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    };
+};
 ```
 
-4. Install **@types/react**, **@types/simple-oauth2** and **[simple-oauth2](https://www.npmjs.com/package/simple-oauth2)**
+6. Paste code below inside **/config/oauth.js** file
+
+We will use Github and Oauth for site's authorization.
 
 ```
-npm install @types/react @types/simple-oauth2 simple-oauth2 --save-dev
-```
-
-5. Paste code below inside **config.ts** file
-
-```
-export const config = {
+export default {
   client: {
     id: process.env.OAUTH_GITHUB_CLIENT_ID,
     secret: process.env.OAUTH_GITHUB_CLIENT_SECRET
@@ -164,7 +210,16 @@ export const config = {
 };
 ```
 
-6. Paste code below inside **auth.ts** file
+7. Paste code below inside **/pages/api/auth.ts** file
+
+We will use NextJs Severless Function provided by Vercel to handling authorization via API endpoints.
+
+Credits:
+
+* <https://www.youtube.com/watch?v=pPzZrWwvDNg>\
+  <https://github.com/robinpokorny/netlify-cms-now>
+* <https://github.com/ublabs/netlify-cms-oauth>
+* [NetlifyCMS with GitHub OAuth authentication hosted on Vercel](https://www.component-driven.dev/articles/netlify-cms-github-oauth-vercel)
 
 ```
 import { IncomingMessage, ServerResponse } from 'http';
@@ -188,12 +243,12 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
 };
 ```
 
-7. Paste code below inside **callback.ts** file
+8. Paste code below inside **callback.ts** file
 
 ```
 import { IncomingMessage, ServerResponse } from 'http';
 import { AuthorizationCode } from 'simple-oauth2';
-import { config } from './lib/config';
+import config from '../../config/oauth';
 
 export default async (req: IncomingMessage, res: ServerResponse) => {
   const { host } = req.headers;
@@ -245,7 +300,7 @@ function renderBody(
 }
 ```
 
-8. Push your codes to the repository by running this code
+8. Push your codes to the repository by running these commands
 
 ```
 git add .
@@ -295,10 +350,3 @@ git pull origin main
 That is all. Congratulation!!\
 \
 In the next part, I will code to display content created by Netlify CMS.
-
-Credits:
-
-* <https://www.youtube.com/watch?v=pPzZrWwvDNg>\
-  <https://github.com/robinpokorny/netlify-cms-now>
-* <https://github.com/ublabs/netlify-cms-oauth>
-* [NetlifyCMS with GitHub OAuth authentication hosted on Vercel](https://www.component-driven.dev/articles/netlify-cms-github-oauth-vercel)
