@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import config from '../config/netlifycms';
+import { netlifyCMSConfig } from '../config/netlifycms';
 
-export default function AdminPage() {
+export default function AdminPage({ config }) {
     useEffect(() => {
         ;(async () => {
             const CMS = (await import('netlify-cms-app')).default
@@ -12,4 +12,13 @@ export default function AdminPage() {
     }, []);
 
   return <div />
+};
+
+export async function getStaticProps() {
+    const config = netlifyCMSConfig(process.env.CLOUDINARY_CLOUD_NAME,process.env.CLOUDINARY_API_KEY);
+    return {
+        props: {
+            config
+        }
+    };
 };

@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "config/oauth.js"  ],
   "exclude": [
     "node_modules"
   ]

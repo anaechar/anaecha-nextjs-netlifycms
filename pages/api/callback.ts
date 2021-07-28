@@ -1,6 +1,6 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { AuthorizationCode } from 'simple-oauth2';
-import config from './lib/oauth';
+import config from '../../config/oauth';
 
 export default async (req: IncomingMessage, res: ServerResponse) => {
   const { host } = req.headers;
