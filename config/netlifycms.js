@@ -21,6 +21,7 @@ export default {
             extension: 'mdx',
             format: 'frontmatter',
             create: true,
+            editor: {preview: false},
             sortable_fields: ['timestamp'],
             view_filters: [
                 {label: 'Drafts', field: 'draft', pattern: true},
@@ -51,6 +52,7 @@ export default {
             extension: 'mdx',
             format: 'frontmatter',
             create: true,
+            editor: {preview: false},
             sortable_fields: ['timestamp'],
             view_filters: [
                 {label: 'Drafts', field: 'draft', pattern: true},
@@ -80,7 +82,9 @@ export default {
                 {
                     label: 'Categories',
                     name: 'categories',
+                    create: true,
                     editor: {preview: false},
+                    sortable_fields: ['name'],
                     file: 'contents/posts-settings/categories.json',
                     fields: [
                         {

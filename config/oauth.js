@@ -1,4 +1,4 @@
-export const config = {
+export default {
   client: {
     id: process.env.OAUTH_GITHUB_CLIENT_ID,
     secret: process.env.OAUTH_GITHUB_CLIENT_SECRET
