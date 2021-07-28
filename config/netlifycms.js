@@ -42,8 +42,8 @@ export function netlifyCMSConfig(cloudName, apiKey) {
                     {label: 'Tags', name: 'tags', widget: 'string', default: '', required: false},
                     {label: 'Description', name: 'description', widget: 'string', default: '', required: false},
                     {label: 'Body', name: 'body', widget: 'markdown', default: '', required: true},
-                    {label: 'Robots', name: 'robots', widget: 'boolean', default: true, required: false},
-                    {label: 'Timestamp', name: 'timestamp', widget: 'datetime', format: 'X', required: true}
+                    {label: 'Timestamp', name: 'timestamp', widget: 'datetime', format: 'X', required: true},
+                    {label: 'Robots', name: 'robots', widget: 'boolean', default: true, required: false}
                 ]
             },
             {

@@ -11,7 +11,7 @@ export default function AdminPage({ config }) {
         })()
     }, []);
 
-  return <div />
+  return <div />;
 };
 
 export async function getStaticProps() {
