@@ -8,7 +8,7 @@ export default function Home({ posts }) {
   return (
     <GlobalLayout>
       <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
-        <div className="text-5xl font-bold py-6">Hi! I'm White.</div>
+        <div className="text-5xl font-bold py-6">Hi! I am White.</div>
         <p className="mb-6">I am the founder of anaecha.com, a pilot, and also interested in coding, animation, and investing. To know me more, visit <NextLink href="/about">about me</NextLink>.</p>
         
         <h2 className="text-2xl py-2">Latest Articles</h2>
