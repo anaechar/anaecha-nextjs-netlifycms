@@ -28,8 +28,8 @@ Netlify CMS requires authorization. In our case, it will be done via Github App.
 3. Click on "Developer settings"
 4. Click on "New Github App"
 5. Enter Github App name
-6. Enter Homepage URL i.g. <your-domain-name>
-7. Enter Callback URL to be <your-domain-name>/api/callback
+6. Enter Homepage URL i.g. your-domain-name
+7. Enter Callback URL to be your-domain-name/api/callback
 8. Disable webhook
 9. Click on "Save changes"
 10. Your app will be created. Click on "Generate a new client secret" and Copy **Client ID** and **Client Secret**
@@ -52,8 +52,8 @@ With limited storage of Github, I prefer storing images in Cloudinary. Additiona
 2. Click on "Settings" on top navigation
 3. Click on "Environment Variables" on left navigation
 4. Enter names and values as followed:\
-   **GITHUB_REPO** as NAME and your repository i.g. <your-name>/<your-repository-name>\
-   **GITHUB_BASE_URL** as NAME and your site's base URL i.g. https://<your-domain-name>\
+   **GITHUB_REPO** as NAME and your repository i.g. your-name/your-repository-name\
+   **GITHUB_BASE_URL** as NAME and your site's base URL i.g. https://your-domain-name\
    **OAUTH_GITHUB_CLIENT_ID** as NAME and your **Client ID** as VALUE\
    **OAUTH_GITHUB_CLIENT_SECRET** as NAME and your **Client Secret** as VALUE\
    **CLOUDINARY_CLOUD_NAME** as NAME and your **Cloud Name** as VALUE\
@@ -258,11 +258,11 @@ export default {
 We will use NextJs Severless Function provided by Vercel to handling authorization via API endpoints. Vercel will convert javascripts (.js) or typescript (.ts) files under /api folder to be serverless functions ([see documentation](https://vercel.com/docs/serverless-functions/supported-languages#node.js)).
 
 Credits:
-
-* <https://www.youtube.com/watch?v=pPzZrWwvDNg>\
+* <https://www.youtube.com/watch?v=pPzZrWwvDNg>
   <https://github.com/robinpokorny/netlify-cms-now>
 * <https://github.com/ublabs/netlify-cms-oauth>
 * [NetlifyCMS with GitHub OAuth authentication hosted on Vercel](https://www.component-driven.dev/articles/netlify-cms-github-oauth-vercel)
+
 
 ```
 import { IncomingMessage, ServerResponse } from 'http';
@@ -343,18 +343,18 @@ function renderBody(
 }
 ```
 
-8. Insert Environment Variables into .env.local file (Replace <...> with yours)
+9. Insert Environment Variables into .env.local file (Replace them with yours)
 
 ```
-GITHUB_REPO=<your-github-repo>
-GITHUB_BASE_URL=<your-github-base-url>
-OAUTH_GITHUB_CLIENT_ID=<your-github-client-id>
-OAUTH_GITHUB_CLIENT_SECRET=<your-github-client-secret>
-CLOUDINARY_CLOUD_NAME=<your-cloud-name>
-CLOUDINARY_API_KEY=<your-api-key>
+GITHUB_REPO=your-github-repo
+GITHUB_BASE_URL=your-github-base-url
+OAUTH_GITHUB_CLIENT_ID=your-github-client-id
+OAUTH_GITHUB_CLIENT_SECRET=your-github-client-secret
+CLOUDINARY_CLOUD_NAME=your-cloud-name
+CLOUDINARY_API_KEY=your-api-key
 ```
 
-Push your codes to the repository by running these commands
+10. Push your codes to the repository by running these commands
 
 ```
 git add .
@@ -364,17 +364,17 @@ git push origin main
 
 ## Test Netlify CMS
 
-1. Go to <your-domain-name>/admin
+1. Go to your-domain-name/admin
 2. Click on "Sign in with Github"
 
-If authorization is success, you will see Netlify CMS dashboard. Test all functionalities. \
-\
+If authorization is success, you will see Netlify CMS dashboard. Test all functionalities.
+
 The related MDX files will be stored inside /contents/posts and /content/pages. It will not reflect in your code editor. To update codes inside your code editor, run this command.
 
 ```
 git pull origin main
 ```
 
-That is all. Congratulation!!\
-\
+That is all. Congratulation!!
+
 In the next part, I will code to display content created by Netlify CMS.
