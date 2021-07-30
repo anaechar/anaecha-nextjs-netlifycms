@@ -96,7 +96,7 @@ npm install simple-oauth2 netlify-cms-app netlify-cms-media-library-cloudinary
 
 This will create the main page for Netlify CMS. When I wrote my code, I faced a problem of "window is not define.". We have to give Manuel Kruisz a credit for the [solution](https://www.manuelkruisz.com/blog/posts/custom-previews-nextjs-netlifycms).
 
-```html
+```javascript
 import { useEffect } from 'react';
 import { netlifyCMSConfig } from '../config/netlifycms';
 
@@ -127,7 +127,7 @@ export async function getStaticProps() {
 
 This file will serve as settings for Netlify CMS. It is customizable, to learn more about the settings, visit this [documentation](https://www.netlifycms.org/docs/configuration-options/).
 
-```
+```javascript
 export function netlifyCMSConfig(repo, base_url, cloudName, apiKey) {
     return {
         backend: {
@@ -239,7 +239,7 @@ export function netlifyCMSConfig(repo, base_url, cloudName, apiKey) {
 
 We will use Github and Oauth for site's authorization.
 
-```
+```javascript
 export default {
   client: {
     id: process.env.OAUTH_GITHUB_CLIENT_ID,
@@ -258,13 +258,13 @@ export default {
 We will use NextJs Severless Function provided by Vercel to handling authorization via API endpoints. Vercel will convert javascripts (.js) or typescript (.ts) files under /api folder to be serverless functions ([see documentation](https://vercel.com/docs/serverless-functions/supported-languages#node.js)).
 
 Credits:
+
 * <https://www.youtube.com/watch?v=pPzZrWwvDNg>
   <https://github.com/robinpokorny/netlify-cms-now>
 * <https://github.com/ublabs/netlify-cms-oauth>
 * [NetlifyCMS with GitHub OAuth authentication hosted on Vercel](https://www.component-driven.dev/articles/netlify-cms-github-oauth-vercel)
 
-
-```
+```javascript
 import { IncomingMessage, ServerResponse } from 'http';
 import { AuthorizationCode } from 'simple-oauth2';
 import { randomBytes } from 'crypto';
@@ -288,7 +288,7 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
 
 8. Paste code below inside **callback.ts** file
 
-```
+```javascript
 import { IncomingMessage, ServerResponse } from 'http';
 import { AuthorizationCode } from 'simple-oauth2';
 import config from '../../config/oauth';
@@ -354,7 +354,32 @@ CLOUDINARY_CLOUD_NAME=your-cloud-name
 CLOUDINARY_API_KEY=your-api-key
 ```
 
-10. Push your codes to the repository by running these commands
+10. Update .eslintrc file
+
+```json
+{
+  "extends": ["next", "next/core-web-vitals"],
+  "rules": {
+    "react/display-name": "off",
+    "react/no-unescaped-entities": "off"
+  }
+}
+```
+
+11. Update next.config.js file
+
+```javascript
+module.exports = {
+  reactStrictMode: true,
+  images: {
+    domains: [
+      'res.cloudinary.com'
+    ]
+  }
+}
+```
+
+12. Push your codes to the repository by running these commands
 
 ```
 git add .
