@@ -1,0 +1,42 @@
+import { MDXRemote } from 'next-mdx-remote';
+import Image from 'next/image';
+import NextLink from 'next/link';
+
+const components = {
+    a: (props) => {
+        const href = props.href;
+        const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'));
+        if(isInternalLink) {
+            return (
+                <NextLink href={href}>
+                    <a {...props}>{props.children}</a>
+                </NextLink>
+            );
+        }
+        return <a {...props} />
+    }
+};
+
+export default function PostLayout({ meta, content }) {
+    return (
+        <>
+            <article className="prose dark:prose-dark w-full max-w-2xl mx-auto">
+                <section className="mb-12">
+                    <div className="text-sm">{meta.category}</div>
+                    <h1 className="py-2 text-5xl font-medium">{meta.title}</h1>
+                    <div className="flex justify-between">
+                        <div className="flex items-center text-gray-400 text-sm">
+                            <NextLink href="/about">White</NextLink>, {meta.publishedDate}
+                        </div>
+                    </div>
+                </section>
+                <section className="post-body">
+                    <MDXRemote 
+                        {...content} 
+                        components={components} 
+                    />
+                </section>
+            </article>
+        </>
+    );
+};

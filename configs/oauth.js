@@ -1,4 +1,4 @@
-export default {
+const config = {
   client: {
     id: process.env.OAUTH_GITHUB_CLIENT_ID,
     secret: process.env.OAUTH_GITHUB_CLIENT_SECRET
@@ -9,3 +9,4 @@ export default {
     authorizePath: '/login/oauth/authorize'
   }
 };
+export default config;

@@ -1,48 +1,38 @@
-import NextLink from 'next/link';
-import fs from 'fs';
-import path from 'path';
-import GlobalLayout from '../components/layouts/GlobalLayout';
-import matter from 'gray-matter';
+import NextLink from 'next/link'
+import { getAllFilesFrontMatter } from '../lib/mdx';
+import LayoutWrapper from '../components/LayoutWrapper';
 
-export default function Home({ posts }) {
+export default function HomePage({ allFilesFrontMatter }) {
+  const meta = {
+    title: 'anaecha',
+    description: 'my description...',
+    robots: true
+  };
   return (
-    <GlobalLayout>
-      <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
-        <div className="text-5xl font-bold py-6">Hi! I am White.</div>
-        <p className="mb-6">I am the founder of anaecha.com, a pilot, and also interested in coding, animation, and investing. To know me more, visit <NextLink href="/about">about me</NextLink>.</p>
-        
-        <h2 className="text-2xl py-2">Latest Articles</h2>
-          {posts.map(post => {
+    <LayoutWrapper meta={meta}>
+      <section>
+        <h2 className="text-5xl font-bold my-4">Hi, I'm White.</h2>
+        <p className="mb-1rem">I'm a hobbyist web developer who also interested in Blockchain, Investment and Animation. To know me more, visit <NextLink href={'/about'}>About me page</NextLink>.</p>
+      </section>
+      <section>
+        <h2 className="text-3xl font-bold my-4">Latest Articles:</h2>
+        {
+          allFilesFrontMatter.map((fileFrontMatter) => {
+            const { title, slug, publishedDate, category, tags } = fileFrontMatter;
             return (
-              <div key={post.slug}>
-                <NextLink href={`/blog/${post.slug}`}>
-                  {post.title}
-                </NextLink>
+              <div key={slug} className="my-3">
+                <h4 className="text-base font-normal"><NextLink href={`/blog/${slug}`}>{title}</NextLink></h4>
+                <div className="text-xs text-gray-500">{publishedDate}, {category} {tags}</div>
               </div>
-            )
-          })}
-      </div>
-    </GlobalLayout>
+            );
+          })
+        }
+      </section>
+    </LayoutWrapper>
   );
 };
 
 export async function getStaticProps() {
-  const slugs = fs.readdirSync('contents/posts');
-  const posts = slugs.map(slug => {
-    const post = fs.readFileSync(path.join('contents/posts', slug));
-    const { data } = matter(post);
-    slug = slug.replace('.mdx','');
-    const items = {
-      slug,
-      title: data.title,
-      publishedDate: data.publishedDate
-    };
-    return items;
-  });
-
-  return {
-    props: {
-      posts
-    }
-  };
+  const allFilesFrontMatter = await getAllFilesFrontMatter('posts');
+  return { props: { allFilesFrontMatter }};
 };

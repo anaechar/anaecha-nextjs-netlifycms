@@ -1,34 +1,31 @@
 import { MDXRemote } from 'next-mdx-remote';
 import Image from 'next/image';
-import Link from 'next/link';
+import NextLink from 'next/link';
 
 const components = {
-    img: (props) => <Image {...props} width={1200} height={800} />,
     a: (props) => {
         const href = props.href;
         const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'));
         if(isInternalLink) {
             return (
-                <Link href={href}>
+                <NextLink href={href}>
                     <a {...props}>{props.children}</a>
-                </Link>
+                </NextLink>
             );
         }
         return <a {...props} />
     }
 };
 
-export default function BlogPost({ meta, content }) {
+export default function PageLayout({ meta, content }) {
     return (
-        <article className="w-full max-w-2xl mx-auto p-4">
-            <section className="py-8">
+        <article className="prose dark:prose-dark w-full max-w-2xl mx-auto">
+            <section className="mb-12">
                 <h1 className="py-2 text-5xl font-medium">{meta.title}</h1>
                 <div className="flex justify-between">
-                    <div className="flex items-center">
-                        <Link href="/about">White</Link>
-                        <span> · {meta.date}</span>
+                    <div className="flex items-center text-gray-400 text-sm">
+                        {meta.publishedDate}
                     </div>
-                    <div>{meta.category}</div>
                 </div>
             </section>
             <section>

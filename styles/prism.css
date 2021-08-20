@@ -4,7 +4,7 @@ pre {
 	background: none;
 	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-	font-size: 1rem;
+	font-size: 0.8rem;
 	text-align: left;
 	white-space: pre;
 	word-spacing: normal;
@@ -50,7 +50,7 @@ pre[class*="language-"] {
 	background: none;
 	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-	font-size: 1rem;
+	font-size: 0.8rem;
 	text-align: left;
 	white-space: pre;
 	word-spacing: normal;

@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Disallow: /admin
+
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://anaecha.com
+
+# Sitemaps
+Sitemap: https://anaecha.com/sitemap.xml

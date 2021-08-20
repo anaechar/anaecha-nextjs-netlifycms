@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    * {
+        @apply box-border;
+    }
+    a {
+        @apply text-blue-500 dark:text-blue-400;
+    }
+    p {
+        @apply pb-6;
+    }
+    ol {
+        @apply list-decimal ml-8 pb-6;
+    }
+    ul {
+        @apply list-disc ml-8 pb-6;
+    }
+    .post-body h2,.post-body h3,.post-body h4,.post-body h5 {
+        @apply py-2 my-6 text-2xl font-bold;
+    }
+    .post-body a {
+        @apply underline;
+    }
+}

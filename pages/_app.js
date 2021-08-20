@@ -1,9 +1,12 @@
-import '../styles/globals.css';
+import '../styles/global.css';
 import '../styles/prism.css';
+import { ThemeProvider } from 'next-themes';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Component {...pageProps} />
+    <ThemeProvider enableSystem={true} attribute='class'>
+      <Component {...pageProps} />
+    </ThemeProvider>
   );
 }
 
