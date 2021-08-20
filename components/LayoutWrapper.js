@@ -5,6 +5,7 @@ import Head from 'next/head';
 
 const LayoutWrapper = ({ children, meta }) => {
     const router = useRouter();
+    const asPath = router.asPath;
     let isAdminPage = false;
     if(router.pathname.includes('/admin')) {
         isAdminPage = true;
@@ -13,7 +14,7 @@ const LayoutWrapper = ({ children, meta }) => {
         <>
             <Head>
                 <title>{meta.title}</title>
-                <link rel="canonical" href={process.env.SITE_BASE_URL + router.asPath} />
+                <link rel="canonical" href={`${process.env.SITE_BASE_URL}${asPath}`} />
                 <meta name="description" content={meta.description} />
                 <meta name="robots" content={meta.robots ? 'index, follow' : 'noindex, nofollow'} />
                 <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
