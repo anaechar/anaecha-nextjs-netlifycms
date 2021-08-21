@@ -4,8 +4,9 @@ module.exports = {
     robotsTxtOptions: {
         policies: [
             { userAgent: '*', disallow: '/admin' },
+            { userAgent: '*', disallow: '/blog/category/*' },
             { userAgent: '*', allow: '/' }
         ]
     },
-    exclude: ['/admin']
+    exclude: ['/admin','/blog/category/*']
 };

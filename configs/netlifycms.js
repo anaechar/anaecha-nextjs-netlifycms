@@ -46,6 +46,36 @@ export function netlifyCMSConfig(repo, base_url, cloudName, apiKey) {
                 ]
             },
             {
+                label: 'Posts - Thai',
+                name: 'poststhai',
+                folder: 'contents/thai',
+                extension: 'mdx',
+                format: 'frontmatter',
+                create: true,
+                editor: {preview: false},
+                sortable_fields: ['timestamp'],
+                view_filters: [
+                    {label: 'Drafts', field: 'draft', pattern: true},
+                    {label: '#Coding', field: 'category', pattern: 'Coding'},
+                    {label: 'Robots', field: 'robots', pattern: false},
+                ],
+                view_groups: [
+                    {label: 'Month-Year:', field: 'publishedDate', pattern: '\\w{3}.\\d{4}'}
+                ],
+                slug: '{{fields.slug}}',
+                fields: [
+                    {label: 'Draft', name: 'draft', widget: 'boolean', default: false, required: false},
+                    {label: 'Published Date', name: 'publishedDate', widget: 'date', format: 'D MMM YYYY', required: true},
+                    {label: 'Title', name: 'title', widget: 'string', required: true},
+                    {label: 'Slug', name: 'slug', widget: 'string', required: true},
+                    {label: 'Category', name: 'category', widget: 'relation', collection: 'settings', file: 'categories', search_fields: ['categories.*.name'], display_fields: ['categories.*.name'], value_field: 'categories.*.name', multiple: true, required: true},
+                    {label: 'Description', name: 'description', widget: 'string', default: '', required: false},
+                    {label: 'Body', name: 'body', widget: 'markdown', default: '', required: true},
+                    {label: 'Timestamp', name: 'timestamp', widget: 'datetime', format: 'X', required: true},
+                    {label: 'Robots', name: 'robots', widget: 'boolean', default: true, required: false}
+                ]
+            },
+            {
                 label: 'Pages',
                 name: 'pages',
                 folder: 'contents/pages',
