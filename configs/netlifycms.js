@@ -93,9 +93,33 @@ export function netlifyCMSConfig(repo, base_url, cloudName, apiKey) {
                                 name: 'categories',
                                 widget: 'list',
                                 fields: [
-                                    {label: 'Name', name: 'name', widget: 'string'}
+                                    {label: 'Name', name: 'name', widget: 'string', required: true}
                                 ]
                             }
+                        ]
+                    },
+                    {
+                        label: 'Meta',
+                        name: 'meta',
+                        create: false,
+                        editor: {preview: false},
+                        file: 'contents/meta.json',
+                        fields: [
+                            {label: 'Title', name: 'title', widget: 'string', required: true},
+                            {label: 'Description', name: 'description', widget: 'string', required: true},
+                            {label: 'Robots', name: 'robots', widget: 'boolean', default: true, required: false},
+                        ]
+                    },
+                    {
+                        label: 'Hero',
+                        name: 'hero',
+                        create: false,
+                        editor: {preview: false},
+                        file: 'contents/hero.json',
+                        fields: [
+                            {label: 'Display', name: 'display', widget: 'boolean', default: true, required: false},
+                            {label: 'Header', name: 'header', widget: 'string', required: true},
+                            {label: 'Content', name: 'content', widget: 'string', required: true}
                         ]
                     }
                 ]

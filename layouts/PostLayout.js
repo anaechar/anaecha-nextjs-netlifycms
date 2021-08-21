@@ -25,7 +25,7 @@ export default function PostLayout({ meta, content }) {
                     <div className="text-sm">{meta.category}</div>
                     <h1 className="py-2 text-5xl font-medium">{meta.title}</h1>
                     <div className="flex justify-between">
-                        <div className="flex items-center text-gray-400 text-sm">
+                        <div className="flex items-center text-gray-400 dark:text-gray-500 text-sm">
                             <NextLink href="/about">White</NextLink>, {meta.publishedDate}
                         </div>
                     </div>
