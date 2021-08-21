@@ -1,5 +1,0 @@
-{
-    "display": true,
-    "header": "Hi, I'm White.",
-    "content": "I'm a hobbyist web developer who also interested in Blockchain, Investment and Animation. To know me more, visit <NextLink href={'/about'}>About me page</NextLink>."
-}

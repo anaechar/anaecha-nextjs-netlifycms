@@ -1,10 +1,12 @@
 {
   "categories": [
     {
-      "name": "Coding"
+      "name": "Web Dev",
+      "slug": "webdev"
     },
     {
-      "name": "NFT"
+      "name": "NFT",
+      "slug": "nft"
     }
   ]
 }

@@ -39,7 +39,6 @@ export function netlifyCMSConfig(repo, base_url, cloudName, apiKey) {
                     {label: 'Title', name: 'title', widget: 'string', required: true},
                     {label: 'Slug', name: 'slug', widget: 'string', required: true},
                     {label: 'Category', name: 'category', widget: 'relation', collection: 'settings', file: 'categories', search_fields: ['categories.*.name'], display_fields: ['categories.*.name'], value_field: 'categories.*.name', multiple: true, required: true},
-                    {label: 'Tags', name: 'tags', widget: 'string', default: '', required: false},
                     {label: 'Description', name: 'description', widget: 'string', default: '', required: false},
                     {label: 'Body', name: 'body', widget: 'markdown', default: '', required: true},
                     {label: 'Timestamp', name: 'timestamp', widget: 'datetime', format: 'X', required: true},
@@ -93,7 +92,8 @@ export function netlifyCMSConfig(repo, base_url, cloudName, apiKey) {
                                 name: 'categories',
                                 widget: 'list',
                                 fields: [
-                                    {label: 'Name', name: 'name', widget: 'string', required: true}
+                                    {label: 'Name', name: 'name', widget: 'string', required: true},
+                                    {label: 'Slug', name: 'slug', widget: 'string', required: true}
                                 ]
                             }
                         ]
