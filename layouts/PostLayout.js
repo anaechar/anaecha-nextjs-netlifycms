@@ -30,10 +30,7 @@ export default function PostLayout({ meta, content }) {
                             meta.category.map((category, i) => {
                                 const categorySlug = getCategoryFieldByInput('name', categories, category).slug;
                                 return (
-                                    <>
-                                        <NextLink href={`/blog/category/${categorySlug}`} key={categorySlug}>{category}</NextLink>
-                                        {i < meta.category.length - 1 ? ', ' : ''}
-                                    </>
+                                    <span key={categorySlug}><NextLink href={`/blog/category/${categorySlug}`}>{category}</NextLink>{i < meta.category.length - 1 ? ', ' : ''}</span>
                                 );
                             })
                         }
