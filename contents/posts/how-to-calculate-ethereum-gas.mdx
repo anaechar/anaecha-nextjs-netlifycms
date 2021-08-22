@@ -9,7 +9,9 @@ description: x
 timestamp: "1629620414"
 robots: true
 ---
-Let's imagine the bus stop with crowds of people. The bus is blockchain. The miner is a driver. The people are transactions. Priority to get on board is based on bidding. People who want to get on board first, must pay a largest amount of money to the driver for Gas fees.
+Let's imagine the bus stop with crowds of people. The bus stop is Mempool where people are waiting. The bus is blockchain. The size of the bus is Block Gas Limit. The miner is a driver. The bus ticket is Transaction cost (Gas fees). The people are transactions.
+
+Priority to get on board is based on bidding. People who want to get on board first, must pay a largest amount of money to the driver for the bus ticket.
 
 Ethereum transactions require fees to be proceeded. In the Ethereum world, the fees are called "Gas". It will be charged by Miners in order to process transactions. 
 
@@ -23,6 +25,25 @@ The Gas price is fluctuated all the times depending on the amount of traffic. Wh
 
 The real-time price can be checked on websites i.g. [etherscan.io](https://etherscan.io/gastracker) and [ethgasstation.info](https://ethgasstation.info) and also The history of gas price can be found on [gasnow.org](https://www.gasnow.org)[](https://ethereumprice.org/gas/).
 
+The Gas Price is denoted in Gwei unit. Wei is the smallest amount of ETH and Gwei is the gigabit of wei.
+
+<table>
+<thead>
+<td>Unit Name</td><td>Number of Wei</td>
+</thead>
+<tbody>
+<tr>
+<td>Wei</td><td>1</td>
+<td>Kwei</td><td>1,000</td>
+<td>Mwei</td><td>1,000,000</td>
+<td>Gwei</td><td>1,000,000,000</td>
+<td>Twei</td><td>1,000,000,000,000</td>
+<td>Pwei</td><td>1,000,000,000,000,000</td>
+<td>Ether</td><td>1,000,000,000,000,000,000</td>
+</tr>
+</tbody>
+</table>
+
 ## Transaction Cost
 
 The Transaction Cost can be calculated by this formula:
@@ -30,3 +51,7 @@ The Transaction Cost can be calculated by this formula:
 Transaction Cost = Gas Required * Gas Price
 
 ## Block Gas Limit
+
+Ethereum Blockchain limits a single block size by Block Gas Limit which is set by Miners. 
+
+Because of this, if you want to put your transactions into the block at the current time, you have to bid higher. Otherwise, you have to sit and wait until the demand drops.
