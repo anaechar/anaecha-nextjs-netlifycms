@@ -1,31 +1,36 @@
 ---
 draft: false
 publishedDate: 23 Aug 2021
-title: How to Add Trezor Wallet in Metamask Extension
+title: How to Add Trezor Wallet in Metamask Chrome Extension
 slug: how-to-add-trezor-wallet-metamask-extension
 category:
   - Blockchain
-description: ""
+description: Trezor adds another layer of security to Metamask. Signing process
+  will be done via Trezor which is the external device. This brings more
+  security to your wallet.
 timestamp: "1629701896"
 robots: true
 ---
+Metamask is a software wallet (hot wallet). Private Key, Public Key, Coins, NFTs and all of the assets are kept inside the software which is connected to the internet world. Fortunatly, it can be hacked. This is one of the Metamask weakness.
 
+However, Metamask allows us to link our hardware wallets, Trezor and Ledger. This creates another layer of security as Signing process will be done with external device (wallet).
+
+Before going further, let's take a look at the requirements.
 
 ## Requirements
 
 1. You need a computer (PC or laptop).
 2. You need to install Chrome web browser.
-3. You already have set up Trezor with your computer. If you have not done this yet, I wrote about "*[How to set up Trezor Device, The Cold Wallet for Your Crypto](/blog/how-set-up-trezor-device-cold-wallet-crypto)*".
+3. You already have set up Trezor with your computer. If you have not done this yet, you can follow my post on "*[How to set up Trezor Device, The Cold Wallet for Your Crypto](/blog/how-set-up-trezor-device-cold-wallet-crypto)*".
 
 If you have already had Metamask Extension for Chrome, you can skip "Install Metamask Extension" section.
 
 ## Install Metamask Extension
 
-On the Metamask official website, the extension is available for Chrome only, the web browser.
+On the Metamask official website, the extension is available for Chrome web browser only.
 
 1. Go to [Metamask.io](https://metamask.io) in your Chrome web browser
-
-2. Click on "Download" and Select "Chrome", then Click on Download
+2. Click on "Download" and Select "Chrome", then Click on "Install Metamask for Chrome"
 
 ![Download Metamask Extension for Chrome](https://res.cloudinary.com/beforeifly/image/upload/v1629702632/anaecha.com/posts/metamask-download-extension-chrome_j17cpk.jpg "Download Metamask Extension for Chrome")
 
@@ -38,7 +43,6 @@ When the installation is complete, you will see the Metamask icon on the top rig
 ## Add Trezor Wallet to Metamask
 
 1. Open Trezor Suite, and Connect your device
-
 2. Click on Metamask Extension icon, then Click on the circle on the top right, then Click on "Connect Hardware Wallet"
 
 ![Connect Hardware Wallet](https://res.cloudinary.com/beforeifly/image/upload/v1629703217/anaecha.com/posts/connect-trezor_dassxb.jpg "Connect Hardware Wallet")
@@ -47,4 +51,16 @@ When the installation is complete, you will see the Metamask icon on the top rig
 
 ![Select Trezor](https://res.cloudinary.com/beforeifly/image/upload/v1629703354/anaecha.com/posts/trezor_yfyp54.jpg "Select Trezor")
 
-3.
+3. The window will be prompt on the screen. Click on "Allow once for this session"
+
+![Export Public Key](https://res.cloudinary.com/beforeifly/image/upload/v1629705489/anaecha.com/posts/export-public-key_p7zbyz.jpg "Export Public Key")
+
+4. Select one of the address and Click "Unlock"
+
+![Unlock wallet address](https://res.cloudinary.com/beforeifly/image/upload/v1629705615/anaecha.com/posts/generate-wallet-address_zzqh5r.jpg "Unlock wallet address")
+
+5. Finally, it is done. Trezor wallet will be listed in the extension.
+
+![Trezor Wallet on Metamask](https://res.cloudinary.com/beforeifly/image/upload/v1629705781/anaecha.com/posts/success-trezor-metamask_fdfge2.jpg "Trezor Wallet on Metamask")
+
+Now, every times you make any transactions with Trezor wallet, you have to confirm the action on the Trezor device (signing process).
