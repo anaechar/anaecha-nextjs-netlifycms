@@ -33,4 +33,7 @@
     .post-body a {
         @apply underline;
     }
+    .post-body img {
+        @apply mx-auto
+    }
 }
