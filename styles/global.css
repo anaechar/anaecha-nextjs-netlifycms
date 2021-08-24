@@ -15,9 +15,6 @@
     ul {
         @apply list-disc;
     }
-    h2, h3 {
-        @apply my-4;
-    }
     .post-body p {
         @apply pb-6;
     }
@@ -34,6 +31,9 @@
         @apply underline;
     }
     .post-body img {
-        @apply mx-auto
+        @apply mx-auto;
+    }
+    .post-body th,.post-body td {
+        @apply p-2;
     }
 }
