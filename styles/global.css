@@ -6,6 +6,9 @@
     * {
         @apply box-border;
     }
+    body {
+        @apply leading-7;
+    }
     a {
         @apply text-blue-500 dark:text-blue-400;
     }

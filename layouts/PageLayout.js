@@ -28,7 +28,7 @@ export default function PageLayout({ meta, content }) {
                     </div>
                 </div>
             </section>
-            <section>
+            <section className="post-body">
                 <MDXRemote 
                     {...content} 
                     components={components} 
