@@ -8,7 +8,7 @@ export default function HomePage({ allFilesFrontMatter }) {
     <LayoutWrapper meta={meta}>
       <section>
         <h2 className="text-5xl font-bold my-4">Hi, I'm White.</h2>
-        <p className="mb-1rem">I'm a hobbyist web developer who also interested in Blockchain, Investment and Animation. To know me more, visit <NextLink href={'/about'}>About me</NextLink> page.</p>
+        <p className="mb-1rem">I write articles about Web Development, Blockchain, Animation and Invesment. To know me more, visit <NextLink href={'/about'}>About me</NextLink> page.</p>
       </section>
       <section>
         <h2 className="text-3xl font-bold my-4">Latest Articles:</h2>
