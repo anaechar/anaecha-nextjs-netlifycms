@@ -9,6 +9,7 @@ export default function Nav() {
                 <nav>
                     <ul className="flex justify-between space-x-3 text-sm list-none p-0 m-0">
                         <li><NextLink href="/">Home</NextLink></li>
+                        <li><NextLink href="/project">Projects</NextLink></li>
                         <li><NextLink href="/about">About</NextLink></li>
                     </ul>
                 </nav>
