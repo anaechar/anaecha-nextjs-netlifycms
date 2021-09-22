@@ -99,6 +99,7 @@ export function netlifyCMSConfig(repo, base_url, cloudName, apiKey) {
                     {label: 'Title', name: 'title', widget: 'string', required: true},
                     {label: 'Slug', name: 'slug', widget: 'string', required: true},
                     {label: 'Category', name: 'category', widget: 'relation', collection: 'settings', file: 'categories', search_fields: ['categories.*.name'], display_fields: ['categories.*.name'], value_field: 'categories.*.name', multiple: true, required: true},
+                    {label: 'Status', name: 'status', widget: 'relation', collection: 'settings', file: 'status', search_fields: ['status.*.name'], display_fields: ['status.*.name'], value_field: 'status.*.name', multiple: false, required: true},
                     {label: 'Description', name: 'description', widget: 'string', default: '', required: false},
                     {label: 'Body', name: 'body', widget: 'markdown', default: '', required: false},
                     {label: 'Show', name: 'show', widget: 'boolean', default: true, required: false},
@@ -121,6 +122,25 @@ export function netlifyCMSConfig(repo, base_url, cloudName, apiKey) {
                             {
                                 label: 'Categories',
                                 name: 'categories',
+                                widget: 'list',
+                                fields: [
+                                    {label: 'Name', name: 'name', widget: 'string', required: true},
+                                    {label: 'Slug', name: 'slug', widget: 'string', required: true}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        label: 'Status',
+                        name: 'status',
+                        create: true,
+                        editor: {preview: false},
+                        sortable_fields: ['name'],
+                        file: 'contents/status.json',
+                        fields: [
+                            {
+                                label: 'Status',
+                                name: 'status',
                                 widget: 'list',
                                 fields: [
                                     {label: 'Name', name: 'name', widget: 'string', required: true},
