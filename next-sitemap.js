@@ -8,5 +8,11 @@ module.exports = {
             { userAgent: '*', allow: '/' }
         ]
     },
-    exclude: ['/admin','/blog/category/*']
+    exclude: ['/admin','/blog/category/*'],
+    transform: async(config,path) => {
+        return {
+            loc: path,
+            lastmod: config.autoLastmod ? new Date().toISOString() : undefined
+        }
+    }
 };
