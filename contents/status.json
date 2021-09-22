@@ -3,6 +3,10 @@
     {
       "name": "Completed",
       "slug": "completed"
+    },
+    {
+      "name": "In Progress",
+      "slug": "in-progress"
     }
   ]
 }
