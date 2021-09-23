@@ -3,13 +3,12 @@ module.exports = {
     generateRobotsTxt: true,
     robotsTxtOptions: {
         policies: [
-            { userAgent: '*', disallow: '/admin' },
-            { userAgent: '*', disallow: '/blog/category/*' },
-            { userAgent: '*', allow: '/' }
+            { userAgent: '*', allow: '/', disallow: ['/admin'] }
         ]
     },
-    exclude: ['/admin','/blog/category/*'],
+    exclude: ['/admin'],
     transform: async(config,path) => {
+        console.log(path);
         return {
             loc: path,
             lastmod: config.autoLastmod ? new Date().toISOString() : undefined

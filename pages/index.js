@@ -4,7 +4,7 @@ import LayoutWrapper from '../components/LayoutWrapper';
 import meta from '../contents/meta.json';
 
 export async function getStaticProps() {
-  const allFilesFrontMatter = await getAllFilesFrontMatter('posts');
+  const allFilesFrontMatter = await getAllFilesFrontMatter('posts', false);
   return { props: { allFilesFrontMatter }};
 };
 
