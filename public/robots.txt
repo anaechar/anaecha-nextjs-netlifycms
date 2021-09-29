@@ -2,7 +2,6 @@
 User-agent: *
 Allow: /
 Disallow: /admin
-Disallow: /blog/category/*
 
 # Host
 Host: https://anaecha.com
