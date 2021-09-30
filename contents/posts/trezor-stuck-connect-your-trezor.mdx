@@ -1,0 +1,44 @@
+---
+draft: false
+publishedDate: 30 Sep 2021
+title: Trezor Stuck at "Connect Your Trezor", Here is how to fix
+slug: trezor-stuck-connect-your-trezor
+category:
+  - Blockchain
+description: Eventhough Trezor is one of the best hardware wallet brands in the
+  world, it still has problems in its firmwares and softwares. In this post, I
+  will write about to fix Trezor connectivity.
+timestamp: "1633009412"
+robots: true
+---
+Even though Trezor is one of the best hardware wallet brands in the world, it still has problems in its firmwares and softwares. In this post, I will write about to fix Trezor connectivity.
+
+If you are stuck at "Connect Your Trezor" on Trezor suite, this post might be helpful.
+
+I experienced this issue with Windows 10 for the first time using Trezor Suite. The software did suggest basic solutions to you but it did not work for me. Here is how I fix this issue.
+
+## Test Trezor Device
+
+1. Disconnect the device from the cable and reconnect
+2. Check the device's screen. It will light up just after connected and go blank again.
+
+This result shows that your device works fine.
+
+## Test USB Cable and Ports
+
+1. Try changing USB Cable, if you have a spare one.
+2. Try connecting to other USB ports as well.
+
+If your device lights up after connected, the cable and port might work fine.
+
+## Check Trezor Driver
+
+1. Search "Device Manager" in settings
+2. Search "Trezor Interface" in the list. If you see "Trezor Interface" with exclamation mark, this means that your computer found the device but has no ideas how to work with it.
+3. Search "Zadig Trezor" in the Google and Download it (or visit this [Trezor wiki](https://wiki.trezor.io/Zadig))
+4. Open Zadig. It will detect Trezor Interface. You have to install the driver for it.
+5. Restart your computer and it should work now.
+
+About [Zadig](https://zadig.akeo.ie): it is a Windows application that installs generic USB drivers.
+
+If you still stuck at "Connect Your Trezor", you might need to post your issue on [Trezor Forum](https://forum.trezor.io/). I tried to contact Trezor via email and took 2 weeks for the response, so I recommend the forum instead.
